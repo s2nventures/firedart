@@ -56,7 +56,7 @@ class ServiceAccountAuthenticator extends Authenticator {
   Future<void> authenticate(Map<String, String> metadata, String uri) async {
     if (clientCredentials == null) {
       throw Exception(
-          'GOOGLE_APPLICATION_CREDENTIALS environment variable cannot be empty');
+          'GOOGLE_APPLICATION_CREDENTIALS environment variable must be set');
     }
 
     final credentials = await obtainAccessCredentialsViaServiceAccount(
