@@ -49,7 +49,7 @@ class ServiceAccountAuthenticator extends Authenticator {
 
   final List<String> scopes;
 
-  ServiceAccountAuthenticator(List<String>? scopes)
+  ServiceAccountAuthenticator([List<String>? scopes])
       : scopes = scopes ?? _defaultScopes;
 
   @override
