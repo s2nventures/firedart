@@ -182,7 +182,11 @@ class Document {
 
   DateTime get updateTime => _rawDocument.updateTime.toDateTime();
 
+  @Deprecated('use data getter instead')
   Map<String, dynamic> get map =>
+      _rawDocument.fields.map((key, _) => MapEntry(key, this[key]));
+
+  Map<String, dynamic> get data =>
       _rawDocument.fields.map((key, _) => MapEntry(key, this[key]));
 
   DocumentReference get reference => DocumentReference(_gateway, path);
@@ -193,7 +197,7 @@ class Document {
   }
 
   @override
-  String toString() => '$path $map';
+  String toString() => '$path $data';
 }
 
 class GeoPoint {

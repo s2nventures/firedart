@@ -43,7 +43,7 @@ class ServiceAccountAuthenticator extends Authenticator {
       return null;
     }
 
-    ServiceAccountCredentials.fromJson(
+    return ServiceAccountCredentials.fromJson(
         jsonDecode(File(googleAppCreds).readAsStringSync()));
   }();
 
@@ -54,8 +54,13 @@ class ServiceAccountAuthenticator extends Authenticator {
 
   @override
   Future<void> authenticate(Map<String, String> metadata, String uri) async {
+    if (clientCredentials == null) {
+      throw Exception(
+          'GOOGLE_APPLICATION_CREDENTIALS environment variable cannot be empty');
+    }
+
     final credentials = await obtainAccessCredentialsViaServiceAccount(
-      clientCredentials,
+      clientCredentials!,
       scopes,
       http.Client(),
     );
