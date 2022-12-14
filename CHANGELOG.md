@@ -1,3 +1,8 @@
+## [0.10.0] - 14 December 2022.
+
+* Support multiple authentication schemes for Firestore
+* Re-generated Firestore client from latest protocol buffers
+
 ## [0.9.0+1] - 07 April 2021.
 
 * Migrate code to NNBD

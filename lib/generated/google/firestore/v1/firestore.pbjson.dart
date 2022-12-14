@@ -3,7 +3,7 @@
 //  source: google/firestore/v1/firestore.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields,deprecated_member_use_from_same_package
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,deprecated_member_use_from_same_package,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
@@ -530,12 +530,102 @@ const RunQueryResponse$json = const {
       '5': 5,
       '10': 'skippedResults'
     },
+    const {'1': 'done', '3': 6, '4': 1, '5': 8, '9': 0, '10': 'done'},
+  ],
+  '8': const [
+    const {'1': 'continuation_selector'},
   ],
 };
 
 /// Descriptor for `RunQueryResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List runQueryResponseDescriptor = $convert.base64Decode(
-    'ChBSdW5RdWVyeVJlc3BvbnNlEiAKC3RyYW5zYWN0aW9uGAIgASgMUgt0cmFuc2FjdGlvbhI5Cghkb2N1bWVudBgBIAEoCzIdLmdvb2dsZS5maXJlc3RvcmUudjEuRG9jdW1lbnRSCGRvY3VtZW50EjcKCXJlYWRfdGltZRgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCHJlYWRUaW1lEicKD3NraXBwZWRfcmVzdWx0cxgEIAEoBVIOc2tpcHBlZFJlc3VsdHM=');
+    'ChBSdW5RdWVyeVJlc3BvbnNlEiAKC3RyYW5zYWN0aW9uGAIgASgMUgt0cmFuc2FjdGlvbhI5Cghkb2N1bWVudBgBIAEoCzIdLmdvb2dsZS5maXJlc3RvcmUudjEuRG9jdW1lbnRSCGRvY3VtZW50EjcKCXJlYWRfdGltZRgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCHJlYWRUaW1lEicKD3NraXBwZWRfcmVzdWx0cxgEIAEoBVIOc2tpcHBlZFJlc3VsdHMSFAoEZG9uZRgGIAEoCEgAUgRkb25lQhcKFWNvbnRpbnVhdGlvbl9zZWxlY3Rvcg==');
+@$core.Deprecated('Use runAggregationQueryRequestDescriptor instead')
+const RunAggregationQueryRequest$json = const {
+  '1': 'RunAggregationQueryRequest',
+  '2': const [
+    const {
+      '1': 'parent',
+      '3': 1,
+      '4': 1,
+      '5': 9,
+      '8': const {},
+      '10': 'parent'
+    },
+    const {
+      '1': 'structured_aggregation_query',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.google.firestore.v1.StructuredAggregationQuery',
+      '9': 0,
+      '10': 'structuredAggregationQuery'
+    },
+    const {
+      '1': 'transaction',
+      '3': 4,
+      '4': 1,
+      '5': 12,
+      '9': 1,
+      '10': 'transaction'
+    },
+    const {
+      '1': 'new_transaction',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.google.firestore.v1.TransactionOptions',
+      '9': 1,
+      '10': 'newTransaction'
+    },
+    const {
+      '1': 'read_time',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '9': 1,
+      '10': 'readTime'
+    },
+  ],
+  '8': const [
+    const {'1': 'query_type'},
+    const {'1': 'consistency_selector'},
+  ],
+};
+
+/// Descriptor for `RunAggregationQueryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List runAggregationQueryRequestDescriptor =
+    $convert.base64Decode(
+        'ChpSdW5BZ2dyZWdhdGlvblF1ZXJ5UmVxdWVzdBIbCgZwYXJlbnQYASABKAlCA+BBAlIGcGFyZW50EnMKHHN0cnVjdHVyZWRfYWdncmVnYXRpb25fcXVlcnkYAiABKAsyLy5nb29nbGUuZmlyZXN0b3JlLnYxLlN0cnVjdHVyZWRBZ2dyZWdhdGlvblF1ZXJ5SABSGnN0cnVjdHVyZWRBZ2dyZWdhdGlvblF1ZXJ5EiIKC3RyYW5zYWN0aW9uGAQgASgMSAFSC3RyYW5zYWN0aW9uElIKD25ld190cmFuc2FjdGlvbhgFIAEoCzInLmdvb2dsZS5maXJlc3RvcmUudjEuVHJhbnNhY3Rpb25PcHRpb25zSAFSDm5ld1RyYW5zYWN0aW9uEjkKCXJlYWRfdGltZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIAVIIcmVhZFRpbWVCDAoKcXVlcnlfdHlwZUIWChRjb25zaXN0ZW5jeV9zZWxlY3Rvcg==');
+@$core.Deprecated('Use runAggregationQueryResponseDescriptor instead')
+const RunAggregationQueryResponse$json = const {
+  '1': 'RunAggregationQueryResponse',
+  '2': const [
+    const {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.google.firestore.v1.AggregationResult',
+      '10': 'result'
+    },
+    const {'1': 'transaction', '3': 2, '4': 1, '5': 12, '10': 'transaction'},
+    const {
+      '1': 'read_time',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'readTime'
+    },
+  ],
+};
+
+/// Descriptor for `RunAggregationQueryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List runAggregationQueryResponseDescriptor =
+    $convert.base64Decode(
+        'ChtSdW5BZ2dyZWdhdGlvblF1ZXJ5UmVzcG9uc2USPgoGcmVzdWx0GAEgASgLMiYuZ29vZ2xlLmZpcmVzdG9yZS52MS5BZ2dyZWdhdGlvblJlc3VsdFIGcmVzdWx0EiAKC3RyYW5zYWN0aW9uGAIgASgMUgt0cmFuc2FjdGlvbhI3CglyZWFkX3RpbWUYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUghyZWFkVGltZQ==');
 @$core.Deprecated('Use partitionQueryRequestDescriptor instead')
 const PartitionQueryRequest$json = const {
   '1': 'PartitionQueryRequest',
@@ -566,15 +656,25 @@ const PartitionQueryRequest$json = const {
     },
     const {'1': 'page_token', '3': 4, '4': 1, '5': 9, '10': 'pageToken'},
     const {'1': 'page_size', '3': 5, '4': 1, '5': 5, '10': 'pageSize'},
+    const {
+      '1': 'read_time',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '9': 1,
+      '10': 'readTime'
+    },
   ],
   '8': const [
     const {'1': 'query_type'},
+    const {'1': 'consistency_selector'},
   ],
 };
 
 /// Descriptor for `PartitionQueryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List partitionQueryRequestDescriptor = $convert.base64Decode(
-    'ChVQYXJ0aXRpb25RdWVyeVJlcXVlc3QSGwoGcGFyZW50GAEgASgJQgPgQQJSBnBhcmVudBJRChBzdHJ1Y3R1cmVkX3F1ZXJ5GAIgASgLMiQuZ29vZ2xlLmZpcmVzdG9yZS52MS5TdHJ1Y3R1cmVkUXVlcnlIAFIPc3RydWN0dXJlZFF1ZXJ5EicKD3BhcnRpdGlvbl9jb3VudBgDIAEoA1IOcGFydGl0aW9uQ291bnQSHQoKcGFnZV90b2tlbhgEIAEoCVIJcGFnZVRva2VuEhsKCXBhZ2Vfc2l6ZRgFIAEoBVIIcGFnZVNpemVCDAoKcXVlcnlfdHlwZQ==');
+    'ChVQYXJ0aXRpb25RdWVyeVJlcXVlc3QSGwoGcGFyZW50GAEgASgJQgPgQQJSBnBhcmVudBJRChBzdHJ1Y3R1cmVkX3F1ZXJ5GAIgASgLMiQuZ29vZ2xlLmZpcmVzdG9yZS52MS5TdHJ1Y3R1cmVkUXVlcnlIAFIPc3RydWN0dXJlZFF1ZXJ5EicKD3BhcnRpdGlvbl9jb3VudBgDIAEoA1IOcGFydGl0aW9uQ291bnQSHQoKcGFnZV90b2tlbhgEIAEoCVIJcGFnZVRva2VuEhsKCXBhZ2Vfc2l6ZRgFIAEoBVIIcGFnZVNpemUSOQoJcmVhZF90aW1lGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgBUghyZWFkVGltZUIMCgpxdWVyeV90eXBlQhYKFGNvbnNpc3RlbmN5X3NlbGVjdG9y');
 @$core.Deprecated('Use partitionQueryResponseDescriptor instead')
 const PartitionQueryResponse$json = const {
   '1': 'PartitionQueryResponse',
@@ -934,13 +1034,25 @@ const ListCollectionIdsRequest$json = const {
     },
     const {'1': 'page_size', '3': 2, '4': 1, '5': 5, '10': 'pageSize'},
     const {'1': 'page_token', '3': 3, '4': 1, '5': 9, '10': 'pageToken'},
+    const {
+      '1': 'read_time',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '9': 0,
+      '10': 'readTime'
+    },
+  ],
+  '8': const [
+    const {'1': 'consistency_selector'},
   ],
 };
 
 /// Descriptor for `ListCollectionIdsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listCollectionIdsRequestDescriptor =
     $convert.base64Decode(
-        'ChhMaXN0Q29sbGVjdGlvbklkc1JlcXVlc3QSGwoGcGFyZW50GAEgASgJQgPgQQJSBnBhcmVudBIbCglwYWdlX3NpemUYAiABKAVSCHBhZ2VTaXplEh0KCnBhZ2VfdG9rZW4YAyABKAlSCXBhZ2VUb2tlbg==');
+        'ChhMaXN0Q29sbGVjdGlvbklkc1JlcXVlc3QSGwoGcGFyZW50GAEgASgJQgPgQQJSBnBhcmVudBIbCglwYWdlX3NpemUYAiABKAVSCHBhZ2VTaXplEh0KCnBhZ2VfdG9rZW4YAyABKAlSCXBhZ2VUb2tlbhI5CglyZWFkX3RpbWUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSABSCHJlYWRUaW1lQhYKFGNvbnNpc3RlbmN5X3NlbGVjdG9y');
 @$core.Deprecated('Use listCollectionIdsResponseDescriptor instead')
 const ListCollectionIdsResponse$json = const {
   '1': 'ListCollectionIdsResponse',
