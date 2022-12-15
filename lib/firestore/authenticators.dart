@@ -74,9 +74,8 @@ class ServiceAccountAuthenticator extends Authenticator {
 class MetadataAuthenticator extends Authenticator {
   @override
   Future<void> authenticate(Map<String, String> metadata, String uri) async {
-    final credentials = await obtainAccessCredentialsViaMetadataServer(
-      http.Client(),
-    );
+    final credentials =
+        await obtainAccessCredentialsViaMetadataServer(http.Client());
 
     metadata['authorization'] = 'Bearer ${credentials.accessToken.data}';
   }
