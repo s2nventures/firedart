@@ -1,7 +1,9 @@
 import 'dart:collection';
 
-import 'package:firedart/generated/google/firestore/v1/document.pb.dart' as fs;
+import 'package:firedart/generated/google/firestore/v1/document.pb.dart' as pb;
+import 'package:firedart/generated/google/firestore/v1/common.pb.dart';
 import 'package:firedart/generated/google/firestore/v1/query.pb.dart';
+import 'package:firedart/generated/google/firestore/v1/write.pb.dart' as pb;
 import 'package:firedart/generated/google/protobuf/wrappers.pb.dart';
 import 'package:firedart/generated/google/type/latlng.pb.dart';
 import 'package:grpc/grpc.dart';
@@ -15,11 +17,11 @@ abstract class Reference {
 
   String get id => path.substring(path.lastIndexOf('/') + 1);
 
-  String get fullPath => '${_gateway.database}/$path';
+  String get fullPath => '${_gateway.documentsRoot}/$path';
 
   Reference(this._gateway, String path)
-      : path = _trimSlashes(path.startsWith(_gateway.database)
-            ? path.substring(_gateway.database.length + 1)
+      : path = _trimSlashes(path.startsWith(_gateway.documentsRoot)
+            ? path.substring(_gateway.documentsRoot.length + 1)
             : path);
 
   factory Reference.create(FirestoreGateway gateway, String path) {
@@ -39,11 +41,13 @@ abstract class Reference {
     return '$runtimeType: $path';
   }
 
-  fs.Document _encodeMap(Map<String, dynamic> map) {
-    var document = fs.Document();
-    map.forEach((key, value) {
+  pb.Document _toProtoDocument(Map<String, dynamic> data) {
+    var document = pb.Document();
+
+    data.forEach((key, value) {
       document.fields[key] = TypeUtil.encode(value);
     });
+
     return document;
   }
 
@@ -77,16 +81,18 @@ class CollectionReference extends Reference {
     List<dynamic>? whereIn,
     bool isNull = false,
   }) {
-    return QueryReference(gateway, path).where(fieldPath,
-        isEqualTo: isEqualTo,
-        isLessThan: isLessThan,
-        isLessThanOrEqualTo: isLessThanOrEqualTo,
-        isGreaterThan: isGreaterThan,
-        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
-        arrayContains: arrayContains,
-        arrayContainsAny: arrayContainsAny,
-        whereIn: whereIn,
-        isNull: isNull);
+    return QueryReference(gateway, path).where(
+      fieldPath,
+      isEqualTo: isEqualTo,
+      isLessThan: isLessThan,
+      isLessThanOrEqualTo: isLessThanOrEqualTo,
+      isGreaterThan: isGreaterThan,
+      isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+      arrayContains: arrayContains,
+      arrayContainsAny: arrayContainsAny,
+      whereIn: whereIn,
+      isNull: isNull,
+    );
   }
 
   /// Returns [CollectionReference] that's additionally sorted by the specified
@@ -105,15 +111,17 @@ class CollectionReference extends Reference {
   DocumentReference document(String id) =>
       DocumentReference(_gateway, '$path/$id');
 
-  Future<Page<Document>> get(
-          {int pageSize = 1024, String nextPageToken = ''}) =>
+  Future<Page<Document>> get({
+    int pageSize = 1024,
+    String nextPageToken = '',
+  }) =>
       _gateway.getCollection(fullPath, pageSize, nextPageToken);
 
   Stream<List<Document>> get stream => _gateway.streamCollection(fullPath);
 
   /// Create a document with a random id.
-  Future<Document> add(Map<String, dynamic> map) =>
-      _gateway.createDocument(fullPath, null, _encodeMap(map));
+  Future<Document> add(Map<String, dynamic> data) =>
+      _gateway.createDocument(fullPath, null, _toProtoDocument(data));
 }
 
 class DocumentReference extends Reference {
@@ -150,18 +158,20 @@ class DocumentReference extends Reference {
   }
 
   /// Create a document if it doesn't exist, otherwise throw exception.
-  Future<Document> create(Map<String, dynamic> map) => _gateway.createDocument(
-      fullPath.substring(0, fullPath.lastIndexOf('/')), id, _encodeMap(map));
+  Future<Document> create(Map<String, dynamic> data) => _gateway.createDocument(
+      fullPath.substring(0, fullPath.lastIndexOf('/')),
+      id,
+      _toProtoDocument(data));
 
   /// Create or update a document.
   /// In the case of an update, any fields not referenced in the payload will be deleted.
-  Future<void> set(Map<String, dynamic> map) async =>
-      _gateway.updateDocument(fullPath, _encodeMap(map), false);
+  Future<void> set(Map<String, dynamic> data) async =>
+      _gateway.updateDocument(fullPath, _toProtoDocument(data), false);
 
   /// Create or update a document.
   /// In case of an update, fields not referenced in the payload will remain unchanged.
-  Future<void> update(Map<String, dynamic> map) =>
-      _gateway.updateDocument(fullPath, _encodeMap(map), true);
+  Future<void> update(Map<String, dynamic> data) =>
+      _gateway.updateDocument(fullPath, _toProtoDocument(data), true);
 
   /// Deletes a document.
   Future<void> delete() async => await _gateway.deleteDocument(fullPath);
@@ -169,7 +179,7 @@ class DocumentReference extends Reference {
 
 class Document {
   final FirestoreGateway _gateway;
-  final fs.Document _rawDocument;
+  final pb.Document _rawDocument;
 
   Document(this._gateway, this._rawDocument);
 
@@ -339,9 +349,15 @@ class QueryReference extends Reference {
 
   Future<List<Document>> get() => _gateway.runQuery(_structuredQuery, fullPath);
 
-  void _addFilter(String fieldPath, dynamic value,
-      {StructuredQuery_FieldFilter_Operator? operator}) {
-    var queryFilter = StructuredQuery_Filter();
+  Stream<List<Document>> get stream => _gateway.streamDocuments(fullPath);
+
+  void _addFilter(
+    String fieldPath,
+    dynamic value, {
+    StructuredQuery_FieldFilter_Operator? operator,
+  }) {
+    final queryFilter = StructuredQuery_Filter();
+
     if (value == null || operator == null) {
       var filter = StructuredQuery_UnaryFilter();
       filter.op = StructuredQuery_UnaryFilter_Operator.IS_NULL;
@@ -349,7 +365,7 @@ class QueryReference extends Reference {
 
       queryFilter.unaryFilter = filter;
     } else {
-      var filter = StructuredQuery_FieldFilter();
+      final filter = StructuredQuery_FieldFilter();
       filter.op = operator;
       filter.value = TypeUtil.encode(value);
 
@@ -361,6 +377,7 @@ class QueryReference extends Reference {
     }
 
     StructuredQuery_CompositeFilter compositeFilter;
+
     if (_structuredQuery.hasWhere() &&
         _structuredQuery.where.hasCompositeFilter()) {
       compositeFilter = _structuredQuery.where.compositeFilter;
@@ -370,7 +387,66 @@ class QueryReference extends Reference {
     }
 
     compositeFilter.filters.add(queryFilter);
+
     _structuredQuery.where = StructuredQuery_Filter()
       ..compositeFilter = compositeFilter;
   }
+}
+
+class WriteBatch {
+  final FirestoreGateway gateway;
+
+  late final List<pb.Write> writes = [];
+
+  WriteBatch(this.gateway);
+
+  void create(DocumentReference docRef, Map<String, dynamic> data) {
+    final doc = docRef._toProtoDocument(data);
+
+    doc.name = docRef.fullPath;
+
+    writes.add(pb.Write(
+      update: doc,
+      //todo: updateTransforms
+    ));
+  }
+
+  void set(DocumentReference docRef, Map<String, dynamic> data) {
+    final doc = docRef._toProtoDocument(data);
+
+    doc.name = docRef.fullPath;
+
+    writes.add(pb.Write(
+      update: doc,
+      //todo: updateTransforms
+    ));
+  }
+
+  ///todo
+  // void update(DocumentReference docRef, List<Update> updates) {
+  //   final doc = docRef._toProtoDocument(data);
+  //
+  //   doc.name = docRef.fullPath;
+  //
+  //   final mask = DocumentMask();
+  //   doc.fields.keys.forEach((key) => mask.fieldPaths.add(key));
+  //
+  //   writes.add(pb.Write(
+  //     update: doc,
+  //     updateMask: mask,
+  //     //todo: updateTransforms
+  //   ));
+  // }
+
+  void delete(DocumentReference docRef) {
+    writes.add(pb.Write(delete: docRef.fullPath));
+  }
+
+  Future<List<WriteResult>?> commit() => gateway.commit(writes);
+}
+
+class WriteResult {
+  final DateTime updateTime;
+
+  WriteResult(this.updateTime);
 }

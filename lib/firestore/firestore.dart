@@ -59,4 +59,6 @@ class Firestore {
       CollectionReference(_gateway, path);
 
   DocumentReference document(String path) => DocumentReference(_gateway, path);
+
+  WriteBatch batch() => WriteBatch(_gateway);
 }

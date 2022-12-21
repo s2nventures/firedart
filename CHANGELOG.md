@@ -1,6 +1,7 @@
-## [0.10.0] - 14 December 2022.
+## [0.10.0] - 21 December 2022.
 
 * Support multiple authentication schemes for Firestore
+* Support batch/bulk writes
 * Re-generated Firestore client from latest protocol buffers
 
 ## [0.9.0+1] - 07 April 2021.

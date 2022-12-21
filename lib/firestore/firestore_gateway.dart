@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:firedart/generated/google/firestore/v1/common.pb.dart';
-import 'package:firedart/generated/google/firestore/v1/document.pb.dart' as fs;
+import 'package:firedart/generated/google/firestore/v1/document.pb.dart' as pb;
 import 'package:firedart/generated/google/firestore/v1/firestore.pbgrpc.dart';
 import 'package:firedart/generated/google/firestore/v1/query.pb.dart';
+import 'package:firedart/generated/google/firestore/v1/write.pb.dart' as pb;
 import 'package:grpc/grpc.dart';
 
 import 'authenticators.dart';
@@ -39,11 +40,15 @@ class _FirestoreGatewayStreamCache {
     _listenRequestStreamController?.close();
 
     _documentMap = <String, Document>{};
+
     _listenRequestStreamController = StreamController<ListenRequest>();
+
     _listenResponseStreamController =
         StreamController<ListenResponse>.broadcast(
-            onListen: _handleListenOnResponseStream,
-            onCancel: _handleCancelOnResponseStream);
+      onListen: _handleListenOnResponseStream,
+      onCancel: _handleCancelOnResponseStream,
+    );
+
     _listenResponseStreamController.addStream(client
         .listen(
           _listenRequestStreamController!.stream,
@@ -52,6 +57,7 @@ class _FirestoreGatewayStreamCache {
           ),
         )
         .handleError(onError));
+
     _listenRequestStreamController!.add(request);
   }
 
@@ -82,6 +88,7 @@ class _FirestoreGatewayStreamCache {
 class FirestoreGateway {
   final Authenticator authenticator;
   final String database;
+  final String documentsRoot;
 
   final Map<String, _FirestoreGatewayStreamCache> _listenRequestStreamMap;
 
@@ -91,7 +98,8 @@ class FirestoreGateway {
     required this.authenticator,
     required String projectId,
     String? databaseId,
-  })  : database =
+  })  : database = "projects/$projectId/databases/${databaseId ?? '(default)'}",
+        documentsRoot =
             'projects/$projectId/databases/${databaseId ?? '(default)'}/documents',
         _listenRequestStreamMap = <String, _FirestoreGatewayStreamCache>{} {
     _setupClient();
@@ -102,16 +110,16 @@ class FirestoreGateway {
     int pageSize,
     String nextPageToken,
   ) async {
-    var request = ListDocumentsRequest()
+    final request = ListDocumentsRequest()
       ..parent = path.substring(0, path.lastIndexOf('/'))
       ..collectionId = path.substring(path.lastIndexOf('/') + 1)
       ..pageSize = pageSize
       ..pageToken = nextPageToken;
 
-    var response =
+    final response =
         await _client.listDocuments(request).catchError(_handleError);
 
-    var documents =
+    final documents =
         response.documents.map((rawDocument) => Document(this, rawDocument));
 
     return Page(documents, response.nextPageToken);
@@ -122,10 +130,10 @@ class FirestoreGateway {
       return _mapCollectionStream(_listenRequestStreamMap[path]!);
     }
 
-    var selector = StructuredQuery_CollectionSelector()
+    final selector = StructuredQuery_CollectionSelector()
       ..collectionId = path.substring(path.lastIndexOf('/') + 1);
 
-    var query = StructuredQuery()..from.add(selector);
+    final query = StructuredQuery()..from.add(selector);
 
     final queryTarget = Target_QueryTarget()
       ..parent = path.substring(0, path.lastIndexOf('/'))
@@ -134,7 +142,7 @@ class FirestoreGateway {
     final target = Target()..query = queryTarget;
 
     final request = ListenRequest()
-      ..database = database
+      ..database = documentsRoot
       ..addTarget = target;
 
     final listenRequestStream = _FirestoreGatewayStreamCache(
@@ -145,7 +153,7 @@ class FirestoreGateway {
 
     _listenRequestStreamMap[path] = listenRequestStream;
 
-    listenRequestStream.setListenRequest(request, _client, database);
+    listenRequestStream.setListenRequest(request, _client, documentsRoot);
 
     return _mapCollectionStream(listenRequestStream);
   }
@@ -153,25 +161,26 @@ class FirestoreGateway {
   Future<Document> createDocument(
     String path,
     String? documentId,
-    fs.Document document,
+    pb.Document document,
   ) async {
-    var split = path.split('/');
-    var parent = split.sublist(0, split.length - 1).join('/');
-    var collectionId = split.last;
+    final split = path.split('/');
+    final parent = split.sublist(0, split.length - 1).join('/');
+    final collectionId = split.last;
 
-    var request = CreateDocumentRequest()
+    final request = CreateDocumentRequest()
       ..parent = parent
       ..collectionId = collectionId
       ..documentId = documentId ?? ''
       ..document = document;
 
-    var response =
+    final response =
         await _client.createDocument(request).catchError(_handleError);
+
     return Document(this, response);
   }
 
   Future<Document> getDocument(path) async {
-    var rawDocument = await _client
+    final rawDocument = await _client
         .getDocument(GetDocumentRequest()..name = path)
         .catchError(_handleError);
 
@@ -180,25 +189,44 @@ class FirestoreGateway {
 
   Future<void> updateDocument(
     String path,
-    fs.Document document,
+    pb.Document document,
     bool update,
-  ) async {
+  ) {
     document.name = path;
 
-    var request = UpdateDocumentRequest()..document = document;
+    final request = UpdateDocumentRequest()..document = document;
 
     if (update) {
-      var mask = DocumentMask();
+      final mask = DocumentMask();
       document.fields.keys.forEach((key) => mask.fieldPaths.add(key));
       request.updateMask = mask;
     }
 
-    await _client.updateDocument(request).catchError(_handleError);
+    return _client.updateDocument(request).catchError(_handleError);
   }
 
   Future<void> deleteDocument(String path) => _client
       .deleteDocument(DeleteDocumentRequest()..name = path)
       .catchError(_handleError);
+
+  Future<List<WriteResult>?> commit(List<pb.Write> writes) async {
+    try {
+      final resp = await _client
+          .commit(CommitRequest(database: database, writes: writes));
+
+      final writeResults = <WriteResult>[];
+
+      for (final writeResult in resp.writeResults) {
+        writeResults.add(WriteResult(writeResult.updateTime.toDateTime()));
+      }
+
+      return writeResults;
+    } catch (e) {
+      _handleError(e);
+    }
+
+    return null;
+  }
 
   Stream<Document?> streamDocument(String path) {
     if (_listenRequestStreamMap.containsKey(path)) {
@@ -208,7 +236,7 @@ class FirestoreGateway {
     final documentsTarget = Target_DocumentsTarget()..documents.add(path);
     final target = Target()..documents = documentsTarget;
     final request = ListenRequest()
-      ..database = database
+      ..database = documentsRoot
       ..addTarget = target;
 
     final listenRequestStream = _FirestoreGatewayStreamCache(
@@ -219,9 +247,33 @@ class FirestoreGateway {
 
     _listenRequestStreamMap[path] = listenRequestStream;
 
-    listenRequestStream.setListenRequest(request, _client, database);
+    listenRequestStream.setListenRequest(request, _client, documentsRoot);
 
     return _mapDocumentStream(listenRequestStream);
+  }
+
+  Stream<List<Document>> streamDocuments(String path) {
+    if (_listenRequestStreamMap.containsKey(path)) {
+      return _mapCollectionStream(_listenRequestStreamMap[path]!);
+    }
+
+    final documentsTarget = Target_DocumentsTarget()..documents.add(path);
+    final target = Target()..documents = documentsTarget;
+    final request = ListenRequest()
+      ..database = documentsRoot
+      ..addTarget = target;
+
+    final listenRequestStream = _FirestoreGatewayStreamCache(
+      onDone: _handleDone,
+      userInfo: path,
+      onError: _handleError,
+    );
+
+    _listenRequestStreamMap[path] = listenRequestStream;
+
+    listenRequestStream.setListenRequest(request, _client, documentsRoot);
+
+    return _mapCollectionStream(listenRequestStream);
   }
 
   Future<List<Document>> runQuery(

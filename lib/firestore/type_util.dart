@@ -66,7 +66,7 @@ abstract class TypeUtil {
       case fs.Value_ValueType.integerValue:
         return value.integerValue.toInt();
       case fs.Value_ValueType.timestampValue:
-        return value.timestampValue.toDateTime().toLocal();
+        return value.timestampValue.toDateTime();
       case fs.Value_ValueType.bytesValue:
         return value.bytesValue;
       case fs.Value_ValueType.referenceValue:
