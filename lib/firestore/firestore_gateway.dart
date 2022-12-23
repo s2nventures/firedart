@@ -252,30 +252,6 @@ class FirestoreGateway {
     return _mapDocumentStream(listenRequestStream);
   }
 
-  Stream<List<Document>> streamDocuments(String path) {
-    if (_listenRequestStreamMap.containsKey(path)) {
-      return _mapCollectionStream(_listenRequestStreamMap[path]!);
-    }
-
-    final documentsTarget = Target_DocumentsTarget()..documents.add(path);
-    final target = Target()..documents = documentsTarget;
-    final request = ListenRequest()
-      ..database = documentsRoot
-      ..addTarget = target;
-
-    final listenRequestStream = _FirestoreGatewayStreamCache(
-      onDone: _handleDone,
-      userInfo: path,
-      onError: _handleError,
-    );
-
-    _listenRequestStreamMap[path] = listenRequestStream;
-
-    listenRequestStream.setListenRequest(request, _client, documentsRoot);
-
-    return _mapCollectionStream(listenRequestStream);
-  }
-
   Future<List<Document>> runQuery(
     StructuredQuery structuredQuery,
     String fullPath,

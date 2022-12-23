@@ -349,8 +349,6 @@ class QueryReference extends Reference {
 
   Future<List<Document>> get() => _gateway.runQuery(_structuredQuery, fullPath);
 
-  Stream<List<Document>> get stream => _gateway.streamDocuments(fullPath);
-
   void _addFilter(
     String fieldPath,
     dynamic value, {
