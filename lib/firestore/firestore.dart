@@ -8,7 +8,11 @@ class Firestore {
   /* Singleton interface */
   static Firestore? _instance;
 
-  static Firestore initialize(String projectId, {String? databaseId}) {
+  static Firestore initialize(
+    String projectId, {
+    String? databaseId,
+    ErrorHandler? onError,
+  }) {
     if (_instance != null) {
       throw Exception('Firestore instance was already initialized');
     }
@@ -25,6 +29,7 @@ class Firestore {
       authenticator: authenticator,
       projectId: projectId,
       databaseId: databaseId,
+      onError: onError,
     );
 
     return _instance!;
@@ -46,10 +51,12 @@ class Firestore {
     required Authenticator authenticator,
     required String projectId,
     String? databaseId,
+    ErrorHandler? onError,
   })  : _gateway = FirestoreGateway(
           authenticator: authenticator,
           projectId: projectId,
           databaseId: databaseId,
+          onError: onError,
         ),
         assert(projectId.isNotEmpty);
 

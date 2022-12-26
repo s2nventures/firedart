@@ -10,10 +10,12 @@ import 'package:grpc/grpc.dart';
 import 'authenticators.dart';
 import 'models.dart';
 
+typedef ErrorHandler = void Function(Object, StackTrace);
+
 class _FirestoreGatewayStreamCache {
   void Function(String userInfo)? onDone;
   String userInfo;
-  void Function(Object e) onError;
+  ErrorHandler onError;
 
   StreamController<ListenRequest>? _listenRequestStreamController;
   late StreamController<ListenResponse> _listenResponseStreamController;
@@ -28,7 +30,7 @@ class _FirestoreGatewayStreamCache {
   _FirestoreGatewayStreamCache({
     this.onDone,
     required this.userInfo,
-    Function(Object e)? onError,
+    ErrorHandler? onError,
   }) : onError = onError ?? _handleErrorStub;
 
   void setListenRequest(
@@ -80,7 +82,7 @@ class _FirestoreGatewayStreamCache {
     _listenRequestStreamController!.close();
   }
 
-  static void _handleErrorStub(e) {
+  static void _handleErrorStub(e, trace) {
     throw e;
   }
 }
@@ -89,6 +91,7 @@ class FirestoreGateway {
   final Authenticator authenticator;
   final String database;
   final String documentsRoot;
+  final ErrorHandler? onError;
 
   final Map<String, _FirestoreGatewayStreamCache> _listenRequestStreamMap;
 
@@ -98,6 +101,7 @@ class FirestoreGateway {
     required this.authenticator,
     required String projectId,
     String? databaseId,
+    this.onError,
   })  : database = "projects/$projectId/databases/${databaseId ?? '(default)'}",
         documentsRoot =
             'projects/$projectId/databases/${databaseId ?? '(default)'}/documents',
@@ -221,8 +225,8 @@ class FirestoreGateway {
       }
 
       return writeResults;
-    } catch (e) {
-      _handleError(e);
+    } catch (e, trace) {
+      _handleError(e, trace);
     }
 
     return null;
@@ -274,8 +278,7 @@ class FirestoreGateway {
         options: authenticator.toCallOptions);
   }
 
-  void _handleError(e) {
-    print('Handling error $e using FirestoreGateway._handleError');
+  void _handleError(e, trace) {
     if (e is GrpcError &&
         [
           StatusCode.unknown,
@@ -287,7 +290,12 @@ class FirestoreGateway {
         ].contains(e.code)) {
       _setupClient();
     }
-    throw e;
+
+    if (onError != null) {
+      onError!(e, trace);
+    } else {
+      throw e;
+    }
   }
 
   void _handleDone(String path) => _listenRequestStreamMap.remove(path);
