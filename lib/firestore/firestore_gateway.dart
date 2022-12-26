@@ -120,8 +120,13 @@ class FirestoreGateway {
       ..pageSize = pageSize
       ..pageToken = nextPageToken;
 
-    final response =
-        await _client.listDocuments(request).catchError(_handleError);
+    late ListDocumentsResponse response;
+
+    try {
+      response = await _client.listDocuments(request);
+    } catch (e, trace) {
+      _handleError(e, trace);
+    }
 
     final documents =
         response.documents.map((rawDocument) => Document(this, rawDocument));
@@ -177,16 +182,26 @@ class FirestoreGateway {
       ..documentId = documentId ?? ''
       ..document = document;
 
-    final response =
-        await _client.createDocument(request).catchError(_handleError);
+    late pb.Document createdDoc;
 
-    return Document(this, response);
+    try {
+      createdDoc = await _client.createDocument(request);
+    } catch (e, trace) {
+      _handleError(e, trace);
+    }
+
+    return Document(this, createdDoc);
   }
 
   Future<Document> getDocument(path) async {
-    final rawDocument = await _client
-        .getDocument(GetDocumentRequest()..name = path)
-        .catchError(_handleError);
+    late pb.Document rawDocument;
+
+    try {
+      rawDocument =
+          await _client.getDocument(GetDocumentRequest()..name = path);
+    } catch (e, trace) {
+      _handleError(e, trace);
+    }
 
     return Document(this, rawDocument);
   }
@@ -195,41 +210,51 @@ class FirestoreGateway {
     String path,
     pb.Document document,
     bool update,
-  ) {
+  ) async {
     document.name = path;
 
     final request = UpdateDocumentRequest()..document = document;
 
     if (update) {
       final mask = DocumentMask();
-      document.fields.keys.forEach((key) => mask.fieldPaths.add(key));
+
+      for (var key in document.fields.keys) {
+        mask.fieldPaths.add(key);
+      }
+
       request.updateMask = mask;
     }
 
-    return _client.updateDocument(request).catchError(_handleError);
+    try {
+      await _client.updateDocument(request);
+    } catch (e, trace) {
+      _handleError(e, trace);
+    }
   }
 
-  Future<void> deleteDocument(String path) => _client
-      .deleteDocument(DeleteDocumentRequest()..name = path)
-      .catchError(_handleError);
+  Future<void> deleteDocument(String path) async {
+    try {
+      _client.deleteDocument(DeleteDocumentRequest()..name = path);
+    } catch (e, trace) {
+      _handleError(e, trace);
+    }
+  }
 
-  Future<List<WriteResult>?> commit(List<pb.Write> writes) async {
+  Future<List<WriteResult>> commit(List<pb.Write> writes) async {
+    final writeResults = <WriteResult>[];
+
     try {
       final resp = await _client
           .commit(CommitRequest(database: database, writes: writes));
 
-      final writeResults = <WriteResult>[];
-
       for (final writeResult in resp.writeResults) {
         writeResults.add(WriteResult(writeResult.updateTime.toDateTime()));
       }
-
-      return writeResults;
     } catch (e, trace) {
       _handleError(e, trace);
     }
 
-    return null;
+    return writeResults;
   }
 
   Stream<Document?> streamDocument(String path) {

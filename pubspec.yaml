@@ -15,4 +15,4 @@ dependencies:
 
 dev_dependencies:
   test: ^1.22.1
-  pedantic: ^1.11.1
+  lints: ^2.0.0

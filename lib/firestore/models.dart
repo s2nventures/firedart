@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:firedart/generated/google/firestore/v1/document.pb.dart' as pb;
-import 'package:firedart/generated/google/firestore/v1/common.pb.dart';
 import 'package:firedart/generated/google/firestore/v1/query.pb.dart';
 import 'package:firedart/generated/google/firestore/v1/write.pb.dart' as pb;
 import 'package:firedart/generated/google/protobuf/wrappers.pb.dart';
@@ -31,10 +30,14 @@ abstract class Reference {
   }
 
   @override
-  bool operator ==(other) =>
+  bool operator ==(Object other) =>
+      identical(this, other) ||
       other is Reference &&
-      runtimeType == other.runtimeType &&
-      fullPath == other.fullPath;
+          runtimeType == other.runtimeType &&
+          fullPath == other.fullPath;
+
+  @override
+  int get hashCode => fullPath.hashCode;
 
   @override
   String toString() {
