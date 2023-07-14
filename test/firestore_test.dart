@@ -1,16 +1,72 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firedart/firedart.dart';
+import 'package:firedart/firestore/application_default_authenticator.dart';
+import 'package:firedart/firestore/token_authenticator.dart';
 import 'package:test/test.dart';
 
+import 'firebase_auth_test.dart';
 import 'test_config.dart';
 
 Future main() async {
-  var tokenStore = VolatileStore();
-  var auth = FirebaseAuth(apiKey, tokenStore);
-  var firestore = Firestore(projectId, auth: auth);
-  await auth.signIn(email, password);
+  group('FirebaseAuth', () {
+    var tokenStore = VolatileStore();
+    var auth = FirebaseAuth(apiKey, tokenStore);
+    final authenticator = TokenAuthenticator.from(auth)?.authenticate;
+    var firestore = Firestore(projectId, authenticator: authenticator);
 
+    setUpAll(() async {
+      await auth.signIn(email, password);
+    });
+
+    runTests(firestore);
+
+    test('Refresh token when expired', () async {
+      tokenStore.expireToken();
+      var map = await firestore.collection('test').get();
+      expect(auth.isSignedIn, true);
+      expect(map, isNot(null));
+    });
+
+    test('Sign out on bad refresh token', () async {
+      tokenStore.setToken('user_id', 'bad_token', 'bad_token', 0);
+      try {
+        await firestore.collection('test').get();
+      } catch (_) {}
+      expect(auth.isSignedIn, false);
+    });
+  });
+
+  group('Custom token', () {
+    var tokenStore = VolatileStore();
+    var auth = FirebaseAuth(apiKey, tokenStore);
+    final authenticator = TokenAuthenticator.from(auth)?.authenticate;
+    var firestore = Firestore(projectId, authenticator: authenticator);
+
+    setUpAll(() async {
+      final token = await createCustomToken();
+      await auth.signInWithCustomToken(token);
+    });
+
+    runTests(firestore);
+  });
+
+  group('ApplicationDefaultAuthenticator', () {
+    assert(
+      Platform.environment.containsKey('GOOGLE_APPLICATION_CREDENTIALS'),
+      'GOOGLE_APPLICATION_CREDENTIALS environment variable must be set. '
+      'See the docs: https://cloud.google.com/docs/authentication/application-default-credentials#GAC',
+    );
+
+    final auth = ApplicationDefaultAuthenticator(useEmulator: false);
+    var firestore = Firestore(projectId, authenticator: auth.authenticate);
+
+    runTests(firestore);
+  });
+}
+
+void runTests(Firestore firestore) {
   test('Create reference', () async {
     // Ensure document exists
     var reference = firestore.document('test/reference');
@@ -185,20 +241,5 @@ Future main() async {
     expect(doc['coordinates'], geoPoint);
     expect(doc['list'], [1, 'text']);
     expect(doc['map'], {'int': 1, 'string': 'text'});
-  });
-
-  test('Refresh token when expired', () async {
-    tokenStore.expireToken();
-    var map = await firestore.collection('test').get();
-    expect(auth.isSignedIn, true);
-    expect(map, isNot(null));
-  });
-
-  test('Sign out on bad refresh token', () async {
-    tokenStore.setToken('user_id', 'bad_token', 'bad_token', 0);
-    try {
-      await firestore.collection('test').get();
-    } catch (_) {}
-    expect(auth.isSignedIn, false);
   });
 }

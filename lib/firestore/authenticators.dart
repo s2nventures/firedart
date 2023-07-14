@@ -5,25 +5,10 @@ import 'package:googleapis_auth/auth_io.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 
-import '../firedart.dart';
-
 abstract class Authenticator {
   Future<void> authenticate(Map<String, String> metadata, String uri);
 
   CallOptions get toCallOptions => CallOptions(providers: [authenticate]);
-}
-
-/// Authenticates with an id token from [FirebaseAuth]
-class TokenAuthenticator extends Authenticator {
-  final FirebaseAuth auth;
-
-  TokenAuthenticator(this.auth);
-
-  @override
-  Future<void> authenticate(Map<String, String> metadata, String uri) async {
-    var idToken = await auth.tokenProvider.idToken;
-    metadata['authorization'] = 'Bearer $idToken';
-  }
 }
 
 /// Authenticates with OAuth2 [AccessCredentials] using the service account

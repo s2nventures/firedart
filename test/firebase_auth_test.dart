@@ -1,3 +1,4 @@
+import 'package:firebase_admin/firebase_admin.dart';
 import 'package:firedart/auth/exceptions.dart';
 import 'package:firedart/firedart.dart';
 import 'package:test/test.dart';
@@ -16,6 +17,16 @@ Future main() async {
   test('Sign In', () async {
     expect(auth.isSignedIn, false);
     await auth.signIn(email, password);
+    expect(auth.isSignedIn, true);
+    auth.signOut();
+    expect(auth.isSignedIn, false);
+  });
+
+  test('Sign In with Custom Token', () async {
+    final customToken = await createCustomToken();
+
+    expect(auth.isSignedIn, false);
+    await auth.signInWithCustomToken(customToken);
     expect(auth.isSignedIn, true);
     auth.signOut();
     expect(auth.isSignedIn, false);
@@ -98,3 +109,11 @@ Future main() async {
     await expect;
   });
 }
+
+Future<String> createCustomToken() => FirebaseAdmin.instance
+    .initializeApp(AppOptions(
+      credential:
+          FirebaseAdmin.instance.certFromPath('test/service-account.json'),
+    ))
+    .auth()
+    .createCustomToken('test');

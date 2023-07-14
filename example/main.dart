@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firedart/firedart.dart';
 
 const apiKey = 'Project Settings -> General -> Web API Key';
@@ -26,7 +24,8 @@ Future main() async {
   var ref = Firestore.instance.collection('test').document('doc');
 
   // Subscribe to changes to that document
-  ref.stream.listen((document) => print('updated: $document'));
+  final subscription =
+      ref.stream.listen((document) => print('updated: $document'));
 
   // Update the document
   await ref.update({'value': 'test'});
@@ -35,10 +34,12 @@ Future main() async {
   var document = await ref.get();
   print('snapshot: ${document['value']}');
 
+  await subscription.cancel();
   auth.signOut();
+  auth.close();
 
   // Allow some time to get the signed out event
-  await Future.delayed(Duration(seconds: 1));
+  await Future.delayed(Duration(milliseconds: 100));
 
-  exit(0);
+  Firestore.instance.close();
 }

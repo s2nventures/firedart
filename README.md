@@ -1,4 +1,4 @@
-# firedart
+# firedart 🔥🎯
 
 [![pub package](https://img.shields.io/pub/v/firedart.svg)](https://pub.dartlang.org/packages/firedart)
 
@@ -49,9 +49,12 @@ var user = await firebaseAuth.getUser();
 
 Further usage examples can be found in the [integration tests](https://github.com/cachapa/firedart/blob/master/test/firebase_auth_test.dart).
 
-### Limitations
+### Authentication providers
 
-* Currently the only supported authentication provider is `Email/Password`.
+* Anonymous
+* Email/Password
+* Custom tokens
+* Google app credentials (i.e. service-account.json)
 
 ## Firestore
 
@@ -75,7 +78,8 @@ You can also instantiate your own `Firestore` object. Please note that if your d
 
 ``` dart
 var firebaseAuth = FirebaseAuth.(apiKey, await HiveStore());
-var firestore = Firestore(authenticator: TokenAuthenticator(firebaseAuth), projectId: projectId);
+var auth = TokenAuthenticator.from(auth)?.authenticate;
+var firestore = Firestore(projectId, authenticator: firebaseAuth);
 
 await firebaseAuth.signIn(email, password);
 var map = await firestore.collection("users").get();

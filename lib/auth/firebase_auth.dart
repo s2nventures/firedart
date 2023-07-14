@@ -9,11 +9,15 @@ class FirebaseAuth {
   /* Singleton interface */
   static FirebaseAuth? _instance;
 
-  static FirebaseAuth initialize(String apiKey, TokenStore tokenStore) {
+  static FirebaseAuth initialize(
+    String apiKey,
+    TokenStore tokenStore, {
+    http.Client? httpClient,
+  }) {
     if (_instance != null) {
       throw Exception('FirebaseAuth instance was already initialized');
     }
-    _instance = FirebaseAuth(apiKey, tokenStore);
+    _instance = FirebaseAuth(apiKey, tokenStore, httpClient: httpClient);
     return _instance!;
   }
 
@@ -59,14 +63,19 @@ class FirebaseAuth {
   Future<User> signIn(String email, String password) =>
       _authGateway.signIn(email, password);
 
+  Future<void> signInWithCustomToken(String token) =>
+      _authGateway.signInWithCustomToken(token);
+
   Future<User> signInAnonymously() => _authGateway.signInAnonymously();
 
   void signOut() => tokenProvider.signOut();
 
+  void close() => httpClient.close();
+
   Future<void> resetPassword(String email) => _authGateway.resetPassword(email);
 
-  Future<void> requestEmailVerification() =>
-      _userGateway.requestEmailVerification();
+  Future<void> requestEmailVerification({String? langCode}) =>
+      _userGateway.requestEmailVerification(langCode: langCode);
 
   Future<void> changePassword(String password) =>
       _userGateway.changePassword(password);

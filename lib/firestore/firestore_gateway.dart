@@ -7,8 +7,12 @@ import 'package:firedart/generated/google/firestore/v1/query.pb.dart';
 import 'package:firedart/generated/google/firestore/v1/write.pb.dart' as pb;
 import 'package:grpc/grpc.dart';
 
-import 'authenticators.dart';
-import 'models.dart';
+import '../firedart.dart';
+
+typedef RequestAuthenticator = Future<void>? Function(
+  Map<String, String> metadata,
+  String uri,
+);
 
 typedef ErrorHandler = void Function(Object, StackTrace);
 
@@ -63,6 +67,11 @@ class _FirestoreGatewayStreamCache {
     _listenRequestStreamController!.add(request);
   }
 
+  void close() {
+    _listenRequestStreamController?.close();
+    _listenResponseStreamController.close();
+  }
+
   void _handleListenOnResponseStream() {
     _shouldCleanup = false;
   }
@@ -88,7 +97,8 @@ class _FirestoreGatewayStreamCache {
 }
 
 class FirestoreGateway {
-  final Authenticator authenticator;
+  final RequestAuthenticator? _authenticator;
+
   final String database;
   final String documentsRoot;
   final ErrorHandler? onError;
@@ -97,16 +107,21 @@ class FirestoreGateway {
 
   late FirestoreClient _client;
 
-  FirestoreGateway({
-    required this.authenticator,
-    required String projectId,
+  late ClientChannel _channel;
+
+  FirestoreGateway(
+    String projectId, {
     String? databaseId,
+    RequestAuthenticator? authenticator,
+    Emulator? emulator,
     this.onError,
-  })  : database = "projects/$projectId/databases/${databaseId ?? '(default)'}",
+  })  : _authenticator = authenticator,
+        database =
+            'projects/$projectId/databases/${databaseId ?? '(default)'}/documents',
         documentsRoot =
             'projects/$projectId/databases/${databaseId ?? '(default)'}/documents',
         _listenRequestStreamMap = <String, _FirestoreGatewayStreamCache>{} {
-    _setupClient();
+    _setupClient(emulator: emulator);
   }
 
   Future<Page<Document>> getCollection(
@@ -216,12 +231,8 @@ class FirestoreGateway {
     final request = UpdateDocumentRequest()..document = document;
 
     if (update) {
-      final mask = DocumentMask();
-
-      for (var key in document.fields.keys) {
-        mask.fieldPaths.add(key);
-      }
-
+      var mask = DocumentMask();
+      document.fields.keys.forEach(mask.fieldPaths.add);
       request.updateMask = mask;
     }
 
@@ -234,7 +245,7 @@ class FirestoreGateway {
 
   Future<void> deleteDocument(String path) async {
     try {
-      _client.deleteDocument(DeleteDocumentRequest()..name = path);
+      await _client.deleteDocument(DeleteDocumentRequest()..name = path);
     } catch (e, trace) {
       _handleError(e, trace);
     }
@@ -297,10 +308,33 @@ class FirestoreGateway {
         .toList();
   }
 
-  void _setupClient() {
+  void close() {
+    _listenRequestStreamMap.forEach((_, stream) => stream.close());
     _listenRequestStreamMap.clear();
-    _client = FirestoreClient(ClientChannel('firestore.googleapis.com'),
-        options: authenticator.toCallOptions);
+    _channel.shutdown();
+  }
+
+  void _setupClient({Emulator? emulator}) {
+    final callOptions = _authenticator != null
+        ? CallOptions(providers: [_authenticator!])
+        : null;
+    _listenRequestStreamMap.clear();
+    _channel = emulator == null
+        ? ClientChannel(
+            'firestore.googleapis.com',
+            options: ChannelOptions(),
+          )
+        : ClientChannel(
+            emulator.host,
+            port: emulator.port,
+            options: ChannelOptions(
+              credentials: ChannelCredentials.insecure(),
+            ),
+          );
+    _client = FirestoreClient(
+      _channel,
+      options: callOptions,
+    );
   }
 
   void _handleError(e, trace) {

@@ -3,7 +3,7 @@
 //  source: google/firestore/v1/firestore.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
 
@@ -15,8 +15,7 @@ import '../../protobuf/timestamp.pb.dart' as $4;
 import 'document.pb.dart' as $1;
 import 'write.pb.dart' as $5;
 import 'query.pb.dart' as $6;
-import 'aggregation_result.pb.dart' as $7;
-import '../../rpc/status.pb.dart' as $8;
+import '../../rpc/status.pb.dart' as $7;
 
 import 'firestore.pbenum.dart';
 
@@ -1886,14 +1885,7 @@ class RunQueryRequest extends $pb.GeneratedMessage {
   $4.Timestamp ensureReadTime() => $_ensure(4);
 }
 
-enum RunQueryResponse_ContinuationSelector { done, notSet }
-
 class RunQueryResponse extends $pb.GeneratedMessage {
-  static const $core.Map<$core.int, RunQueryResponse_ContinuationSelector>
-      _RunQueryResponse_ContinuationSelectorByTag = {
-    6: RunQueryResponse_ContinuationSelector.done,
-    0: RunQueryResponse_ContinuationSelector.notSet
-  };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
@@ -1903,7 +1895,6 @@ class RunQueryResponse extends $pb.GeneratedMessage {
               ? ''
               : 'google.firestore.v1'),
       createEmptyInstance: create)
-    ..oo(0, [6])
     ..aOM<$1.Document>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -1928,11 +1919,6 @@ class RunQueryResponse extends $pb.GeneratedMessage {
             ? ''
             : 'skippedResults',
         $pb.PbFieldType.O3)
-    ..aOB(
-        6,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'done')
     ..hasRequiredFields = false;
 
   RunQueryResponse._() : super();
@@ -1941,7 +1927,6 @@ class RunQueryResponse extends $pb.GeneratedMessage {
     $core.List<$core.int>? transaction,
     $4.Timestamp? readTime,
     $core.int? skippedResults,
-    $core.bool? done,
   }) {
     final _result = create();
     if (document != null) {
@@ -1955,9 +1940,6 @@ class RunQueryResponse extends $pb.GeneratedMessage {
     }
     if (skippedResults != null) {
       _result.skippedResults = skippedResults;
-    }
-    if (done != null) {
-      _result.done = done;
     }
     return _result;
   }
@@ -1987,10 +1969,6 @@ class RunQueryResponse extends $pb.GeneratedMessage {
   static RunQueryResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<RunQueryResponse>(create);
   static RunQueryResponse? _defaultInstance;
-
-  RunQueryResponse_ContinuationSelector whichContinuationSelector() =>
-      _RunQueryResponse_ContinuationSelectorByTag[$_whichOneof(0)]!;
-  void clearContinuationSelector() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
   $1.Document get document => $_getN(0);
@@ -2043,351 +2021,15 @@ class RunQueryResponse extends $pb.GeneratedMessage {
   $core.bool hasSkippedResults() => $_has(3);
   @$pb.TagNumber(4)
   void clearSkippedResults() => clearField(4);
-
-  @$pb.TagNumber(6)
-  $core.bool get done => $_getBF(4);
-  @$pb.TagNumber(6)
-  set done($core.bool v) {
-    $_setBool(4, v);
-  }
-
-  @$pb.TagNumber(6)
-  $core.bool hasDone() => $_has(4);
-  @$pb.TagNumber(6)
-  void clearDone() => clearField(6);
-}
-
-enum RunAggregationQueryRequest_QueryType { structuredAggregationQuery, notSet }
-
-enum RunAggregationQueryRequest_ConsistencySelector {
-  transaction,
-  newTransaction,
-  readTime,
-  notSet
-}
-
-class RunAggregationQueryRequest extends $pb.GeneratedMessage {
-  static const $core.Map<$core.int, RunAggregationQueryRequest_QueryType>
-      _RunAggregationQueryRequest_QueryTypeByTag = {
-    2: RunAggregationQueryRequest_QueryType.structuredAggregationQuery,
-    0: RunAggregationQueryRequest_QueryType.notSet
-  };
-  static const $core
-          .Map<$core.int, RunAggregationQueryRequest_ConsistencySelector>
-      _RunAggregationQueryRequest_ConsistencySelectorByTag = {
-    4: RunAggregationQueryRequest_ConsistencySelector.transaction,
-    5: RunAggregationQueryRequest_ConsistencySelector.newTransaction,
-    6: RunAggregationQueryRequest_ConsistencySelector.readTime,
-    0: RunAggregationQueryRequest_ConsistencySelector.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'RunAggregationQueryRequest',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..oo(0, [2])
-    ..oo(1, [4, 5, 6])
-    ..aOS(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'parent')
-    ..aOM<$6.StructuredAggregationQuery>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'structuredAggregationQuery',
-        subBuilder: $6.StructuredAggregationQuery.create)
-    ..a<$core.List<$core.int>>(
-        4,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'transaction',
-        $pb.PbFieldType.OY)
-    ..aOM<$3.TransactionOptions>(
-        5,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'newTransaction',
-        subBuilder: $3.TransactionOptions.create)
-    ..aOM<$4.Timestamp>(
-        6,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'readTime',
-        subBuilder: $4.Timestamp.create)
-    ..hasRequiredFields = false;
-
-  RunAggregationQueryRequest._() : super();
-  factory RunAggregationQueryRequest({
-    $core.String? parent,
-    $6.StructuredAggregationQuery? structuredAggregationQuery,
-    $core.List<$core.int>? transaction,
-    $3.TransactionOptions? newTransaction,
-    $4.Timestamp? readTime,
-  }) {
-    final _result = create();
-    if (parent != null) {
-      _result.parent = parent;
-    }
-    if (structuredAggregationQuery != null) {
-      _result.structuredAggregationQuery = structuredAggregationQuery;
-    }
-    if (transaction != null) {
-      _result.transaction = transaction;
-    }
-    if (newTransaction != null) {
-      _result.newTransaction = newTransaction;
-    }
-    if (readTime != null) {
-      _result.readTime = readTime;
-    }
-    return _result;
-  }
-  factory RunAggregationQueryRequest.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory RunAggregationQueryRequest.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  RunAggregationQueryRequest clone() =>
-      RunAggregationQueryRequest()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  RunAggregationQueryRequest copyWith(
-          void Function(RunAggregationQueryRequest) updates) =>
-      super.copyWith(
-              (message) => updates(message as RunAggregationQueryRequest))
-          as RunAggregationQueryRequest; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static RunAggregationQueryRequest create() => RunAggregationQueryRequest._();
-  RunAggregationQueryRequest createEmptyInstance() => create();
-  static $pb.PbList<RunAggregationQueryRequest> createRepeated() =>
-      $pb.PbList<RunAggregationQueryRequest>();
-  @$core.pragma('dart2js:noInline')
-  static RunAggregationQueryRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<RunAggregationQueryRequest>(create);
-  static RunAggregationQueryRequest? _defaultInstance;
-
-  RunAggregationQueryRequest_QueryType whichQueryType() =>
-      _RunAggregationQueryRequest_QueryTypeByTag[$_whichOneof(0)]!;
-  void clearQueryType() => clearField($_whichOneof(0));
-
-  RunAggregationQueryRequest_ConsistencySelector whichConsistencySelector() =>
-      _RunAggregationQueryRequest_ConsistencySelectorByTag[$_whichOneof(1)]!;
-  void clearConsistencySelector() => clearField($_whichOneof(1));
-
-  @$pb.TagNumber(1)
-  $core.String get parent => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set parent($core.String v) {
-    $_setString(0, v);
-  }
-
-  @$pb.TagNumber(1)
-  $core.bool hasParent() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearParent() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $6.StructuredAggregationQuery get structuredAggregationQuery => $_getN(1);
-  @$pb.TagNumber(2)
-  set structuredAggregationQuery($6.StructuredAggregationQuery v) {
-    setField(2, v);
-  }
-
-  @$pb.TagNumber(2)
-  $core.bool hasStructuredAggregationQuery() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearStructuredAggregationQuery() => clearField(2);
-  @$pb.TagNumber(2)
-  $6.StructuredAggregationQuery ensureStructuredAggregationQuery() =>
-      $_ensure(1);
-
-  @$pb.TagNumber(4)
-  $core.List<$core.int> get transaction => $_getN(2);
-  @$pb.TagNumber(4)
-  set transaction($core.List<$core.int> v) {
-    $_setBytes(2, v);
-  }
-
-  @$pb.TagNumber(4)
-  $core.bool hasTransaction() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearTransaction() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $3.TransactionOptions get newTransaction => $_getN(3);
-  @$pb.TagNumber(5)
-  set newTransaction($3.TransactionOptions v) {
-    setField(5, v);
-  }
-
-  @$pb.TagNumber(5)
-  $core.bool hasNewTransaction() => $_has(3);
-  @$pb.TagNumber(5)
-  void clearNewTransaction() => clearField(5);
-  @$pb.TagNumber(5)
-  $3.TransactionOptions ensureNewTransaction() => $_ensure(3);
-
-  @$pb.TagNumber(6)
-  $4.Timestamp get readTime => $_getN(4);
-  @$pb.TagNumber(6)
-  set readTime($4.Timestamp v) {
-    setField(6, v);
-  }
-
-  @$pb.TagNumber(6)
-  $core.bool hasReadTime() => $_has(4);
-  @$pb.TagNumber(6)
-  void clearReadTime() => clearField(6);
-  @$pb.TagNumber(6)
-  $4.Timestamp ensureReadTime() => $_ensure(4);
-}
-
-class RunAggregationQueryResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'RunAggregationQueryResponse',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..aOM<$7.AggregationResult>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'result',
-        subBuilder: $7.AggregationResult.create)
-    ..a<$core.List<$core.int>>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'transaction',
-        $pb.PbFieldType.OY)
-    ..aOM<$4.Timestamp>(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'readTime',
-        subBuilder: $4.Timestamp.create)
-    ..hasRequiredFields = false;
-
-  RunAggregationQueryResponse._() : super();
-  factory RunAggregationQueryResponse({
-    $7.AggregationResult? result,
-    $core.List<$core.int>? transaction,
-    $4.Timestamp? readTime,
-  }) {
-    final _result = create();
-    if (result != null) {
-      _result.result = result;
-    }
-    if (transaction != null) {
-      _result.transaction = transaction;
-    }
-    if (readTime != null) {
-      _result.readTime = readTime;
-    }
-    return _result;
-  }
-  factory RunAggregationQueryResponse.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory RunAggregationQueryResponse.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  RunAggregationQueryResponse clone() =>
-      RunAggregationQueryResponse()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  RunAggregationQueryResponse copyWith(
-          void Function(RunAggregationQueryResponse) updates) =>
-      super.copyWith(
-              (message) => updates(message as RunAggregationQueryResponse))
-          as RunAggregationQueryResponse; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static RunAggregationQueryResponse create() =>
-      RunAggregationQueryResponse._();
-  RunAggregationQueryResponse createEmptyInstance() => create();
-  static $pb.PbList<RunAggregationQueryResponse> createRepeated() =>
-      $pb.PbList<RunAggregationQueryResponse>();
-  @$core.pragma('dart2js:noInline')
-  static RunAggregationQueryResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<RunAggregationQueryResponse>(create);
-  static RunAggregationQueryResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $7.AggregationResult get result => $_getN(0);
-  @$pb.TagNumber(1)
-  set result($7.AggregationResult v) {
-    setField(1, v);
-  }
-
-  @$pb.TagNumber(1)
-  $core.bool hasResult() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResult() => clearField(1);
-  @$pb.TagNumber(1)
-  $7.AggregationResult ensureResult() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $core.List<$core.int> get transaction => $_getN(1);
-  @$pb.TagNumber(2)
-  set transaction($core.List<$core.int> v) {
-    $_setBytes(1, v);
-  }
-
-  @$pb.TagNumber(2)
-  $core.bool hasTransaction() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTransaction() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $4.Timestamp get readTime => $_getN(2);
-  @$pb.TagNumber(3)
-  set readTime($4.Timestamp v) {
-    setField(3, v);
-  }
-
-  @$pb.TagNumber(3)
-  $core.bool hasReadTime() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearReadTime() => clearField(3);
-  @$pb.TagNumber(3)
-  $4.Timestamp ensureReadTime() => $_ensure(2);
 }
 
 enum PartitionQueryRequest_QueryType { structuredQuery, notSet }
-
-enum PartitionQueryRequest_ConsistencySelector { readTime, notSet }
 
 class PartitionQueryRequest extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, PartitionQueryRequest_QueryType>
       _PartitionQueryRequest_QueryTypeByTag = {
     2: PartitionQueryRequest_QueryType.structuredQuery,
     0: PartitionQueryRequest_QueryType.notSet
-  };
-  static const $core.Map<$core.int, PartitionQueryRequest_ConsistencySelector>
-      _PartitionQueryRequest_ConsistencySelectorByTag = {
-    6: PartitionQueryRequest_ConsistencySelector.readTime,
-    0: PartitionQueryRequest_ConsistencySelector.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
@@ -2399,7 +2041,6 @@ class PartitionQueryRequest extends $pb.GeneratedMessage {
               : 'google.firestore.v1'),
       createEmptyInstance: create)
     ..oo(0, [2])
-    ..oo(1, [6])
     ..aOS(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -2427,12 +2068,6 @@ class PartitionQueryRequest extends $pb.GeneratedMessage {
             ? ''
             : 'pageSize',
         $pb.PbFieldType.O3)
-    ..aOM<$4.Timestamp>(
-        6,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'readTime',
-        subBuilder: $4.Timestamp.create)
     ..hasRequiredFields = false;
 
   PartitionQueryRequest._() : super();
@@ -2442,7 +2077,6 @@ class PartitionQueryRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? partitionCount,
     $core.String? pageToken,
     $core.int? pageSize,
-    $4.Timestamp? readTime,
   }) {
     final _result = create();
     if (parent != null) {
@@ -2459,9 +2093,6 @@ class PartitionQueryRequest extends $pb.GeneratedMessage {
     }
     if (pageSize != null) {
       _result.pageSize = pageSize;
-    }
-    if (readTime != null) {
-      _result.readTime = readTime;
     }
     return _result;
   }
@@ -2497,10 +2128,6 @@ class PartitionQueryRequest extends $pb.GeneratedMessage {
   PartitionQueryRequest_QueryType whichQueryType() =>
       _PartitionQueryRequest_QueryTypeByTag[$_whichOneof(0)]!;
   void clearQueryType() => clearField($_whichOneof(0));
-
-  PartitionQueryRequest_ConsistencySelector whichConsistencySelector() =>
-      _PartitionQueryRequest_ConsistencySelectorByTag[$_whichOneof(1)]!;
-  void clearConsistencySelector() => clearField($_whichOneof(1));
 
   @$pb.TagNumber(1)
   $core.String get parent => $_getSZ(0);
@@ -2563,20 +2190,6 @@ class PartitionQueryRequest extends $pb.GeneratedMessage {
   $core.bool hasPageSize() => $_has(4);
   @$pb.TagNumber(5)
   void clearPageSize() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $4.Timestamp get readTime => $_getN(5);
-  @$pb.TagNumber(6)
-  set readTime($4.Timestamp v) {
-    setField(6, v);
-  }
-
-  @$pb.TagNumber(6)
-  $core.bool hasReadTime() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearReadTime() => clearField(6);
-  @$pb.TagNumber(6)
-  $4.Timestamp ensureReadTime() => $_ensure(5);
 }
 
 class PartitionQueryResponse extends $pb.GeneratedMessage {
@@ -3655,13 +3268,13 @@ class TargetChange extends $pb.GeneratedMessage {
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'targetIds',
-        $pb.PbFieldType.K3)
-    ..aOM<$8.Status>(
+        $pb.PbFieldType.P3)
+    ..aOM<$7.Status>(
         3,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'cause',
-        subBuilder: $8.Status.create)
+        subBuilder: $7.Status.create)
     ..a<$core.List<$core.int>>(
         4,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -3680,7 +3293,7 @@ class TargetChange extends $pb.GeneratedMessage {
   factory TargetChange({
     TargetChange_TargetChangeType? targetChangeType,
     $core.Iterable<$core.int>? targetIds,
-    $8.Status? cause,
+    $7.Status? cause,
     $core.List<$core.int>? resumeToken,
     $4.Timestamp? readTime,
   }) {
@@ -3745,9 +3358,9 @@ class TargetChange extends $pb.GeneratedMessage {
   $core.List<$core.int> get targetIds => $_getList(1);
 
   @$pb.TagNumber(3)
-  $8.Status get cause => $_getN(2);
+  $7.Status get cause => $_getN(2);
   @$pb.TagNumber(3)
-  set cause($8.Status v) {
+  set cause($7.Status v) {
     setField(3, v);
   }
 
@@ -3756,7 +3369,7 @@ class TargetChange extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearCause() => clearField(3);
   @$pb.TagNumber(3)
-  $8.Status ensureCause() => $_ensure(2);
+  $7.Status ensureCause() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.List<$core.int> get resumeToken => $_getN(3);
@@ -3785,15 +3398,7 @@ class TargetChange extends $pb.GeneratedMessage {
   $4.Timestamp ensureReadTime() => $_ensure(4);
 }
 
-enum ListCollectionIdsRequest_ConsistencySelector { readTime, notSet }
-
 class ListCollectionIdsRequest extends $pb.GeneratedMessage {
-  static const $core
-          .Map<$core.int, ListCollectionIdsRequest_ConsistencySelector>
-      _ListCollectionIdsRequest_ConsistencySelectorByTag = {
-    4: ListCollectionIdsRequest_ConsistencySelector.readTime,
-    0: ListCollectionIdsRequest_ConsistencySelector.notSet
-  };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
@@ -3803,7 +3408,6 @@ class ListCollectionIdsRequest extends $pb.GeneratedMessage {
               ? ''
               : 'google.firestore.v1'),
       createEmptyInstance: create)
-    ..oo(0, [4])
     ..aOS(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -3820,12 +3424,6 @@ class ListCollectionIdsRequest extends $pb.GeneratedMessage {
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'pageToken')
-    ..aOM<$4.Timestamp>(
-        4,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'readTime',
-        subBuilder: $4.Timestamp.create)
     ..hasRequiredFields = false;
 
   ListCollectionIdsRequest._() : super();
@@ -3833,7 +3431,6 @@ class ListCollectionIdsRequest extends $pb.GeneratedMessage {
     $core.String? parent,
     $core.int? pageSize,
     $core.String? pageToken,
-    $4.Timestamp? readTime,
   }) {
     final _result = create();
     if (parent != null) {
@@ -3844,9 +3441,6 @@ class ListCollectionIdsRequest extends $pb.GeneratedMessage {
     }
     if (pageToken != null) {
       _result.pageToken = pageToken;
-    }
-    if (readTime != null) {
-      _result.readTime = readTime;
     }
     return _result;
   }
@@ -3878,10 +3472,6 @@ class ListCollectionIdsRequest extends $pb.GeneratedMessage {
   static ListCollectionIdsRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ListCollectionIdsRequest>(create);
   static ListCollectionIdsRequest? _defaultInstance;
-
-  ListCollectionIdsRequest_ConsistencySelector whichConsistencySelector() =>
-      _ListCollectionIdsRequest_ConsistencySelectorByTag[$_whichOneof(0)]!;
-  void clearConsistencySelector() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
   $core.String get parent => $_getSZ(0);
@@ -3918,20 +3508,6 @@ class ListCollectionIdsRequest extends $pb.GeneratedMessage {
   $core.bool hasPageToken() => $_has(2);
   @$pb.TagNumber(3)
   void clearPageToken() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $4.Timestamp get readTime => $_getN(3);
-  @$pb.TagNumber(4)
-  set readTime($4.Timestamp v) {
-    setField(4, v);
-  }
-
-  @$pb.TagNumber(4)
-  $core.bool hasReadTime() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearReadTime() => clearField(4);
-  @$pb.TagNumber(4)
-  $4.Timestamp ensureReadTime() => $_ensure(3);
 }
 
 class ListCollectionIdsResponse extends $pb.GeneratedMessage {
@@ -4129,19 +3705,19 @@ class BatchWriteResponse extends $pb.GeneratedMessage {
             : 'writeResults',
         $pb.PbFieldType.PM,
         subBuilder: $5.WriteResult.create)
-    ..pc<$8.Status>(
+    ..pc<$7.Status>(
         2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'status',
         $pb.PbFieldType.PM,
-        subBuilder: $8.Status.create)
+        subBuilder: $7.Status.create)
     ..hasRequiredFields = false;
 
   BatchWriteResponse._() : super();
   factory BatchWriteResponse({
     $core.Iterable<$5.WriteResult>? writeResults,
-    $core.Iterable<$8.Status>? status,
+    $core.Iterable<$7.Status>? status,
   }) {
     final _result = create();
     if (writeResults != null) {
@@ -4183,5 +3759,5 @@ class BatchWriteResponse extends $pb.GeneratedMessage {
   $core.List<$5.WriteResult> get writeResults => $_getList(0);
 
   @$pb.TagNumber(2)
-  $core.List<$8.Status> get status => $_getList(1);
+  $core.List<$7.Status> get status => $_getList(1);
 }
