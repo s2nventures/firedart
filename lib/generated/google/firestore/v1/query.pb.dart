@@ -1,9 +1,13 @@
-///
+//
 //  Generated code. Do not modify.
 //  source: google/firestore/v1/query.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
+
+// ignore_for_file: annotate_overrides, camel_case_types
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:core' as $core;
 
@@ -11,53 +15,29 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../protobuf/wrappers.pb.dart' as $0;
 import 'document.pb.dart' as $1;
-
 import 'query.pbenum.dart';
 
 export 'query.pbenum.dart';
 
 class StructuredQuery_CollectionSelector extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery.CollectionSelector',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..aOS(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'collectionId')
-    ..aOB(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'allDescendants')
-    ..hasRequiredFields = false;
-
+  factory StructuredQuery_CollectionSelector() => create();
   StructuredQuery_CollectionSelector._() : super();
-  factory StructuredQuery_CollectionSelector({
-    $core.String? collectionId,
-    $core.bool? allDescendants,
-  }) {
-    final _result = create();
-    if (collectionId != null) {
-      _result.collectionId = collectionId;
-    }
-    if (allDescendants != null) {
-      _result.allDescendants = allDescendants;
-    }
-    return _result;
-  }
   factory StructuredQuery_CollectionSelector.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredQuery_CollectionSelector.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredQuery.CollectionSelector',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..aOS(2, _omitFieldNames ? '' : 'collectionId')
+    ..aOB(3, _omitFieldNames ? '' : 'allDescendants')
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -70,8 +50,10 @@ class StructuredQuery_CollectionSelector extends $pb.GeneratedMessage {
           void Function(StructuredQuery_CollectionSelector) updates) =>
       super.copyWith((message) =>
               updates(message as StructuredQuery_CollectionSelector))
-          as StructuredQuery_CollectionSelector; // ignore: deprecated_member_use
+          as StructuredQuery_CollectionSelector;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery_CollectionSelector create() =>
       StructuredQuery_CollectionSelector._();
@@ -117,6 +99,15 @@ enum StructuredQuery_Filter_FilterType {
 }
 
 class StructuredQuery_Filter extends $pb.GeneratedMessage {
+  factory StructuredQuery_Filter() => create();
+  StructuredQuery_Filter._() : super();
+  factory StructuredQuery_Filter.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory StructuredQuery_Filter.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
   static const $core.Map<$core.int, StructuredQuery_Filter_FilterType>
       _StructuredQuery_Filter_FilterTypeByTag = {
     1: StructuredQuery_Filter_FilterType.compositeFilter,
@@ -125,59 +116,20 @@ class StructuredQuery_Filter extends $pb.GeneratedMessage {
     0: StructuredQuery_Filter_FilterType.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery.Filter',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
+      _omitMessageNames ? '' : 'StructuredQuery.Filter',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
       createEmptyInstance: create)
     ..oo(0, [1, 2, 3])
     ..aOM<StructuredQuery_CompositeFilter>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'compositeFilter',
+        1, _omitFieldNames ? '' : 'compositeFilter',
         subBuilder: StructuredQuery_CompositeFilter.create)
-    ..aOM<StructuredQuery_FieldFilter>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'fieldFilter',
+    ..aOM<StructuredQuery_FieldFilter>(2, _omitFieldNames ? '' : 'fieldFilter',
         subBuilder: StructuredQuery_FieldFilter.create)
-    ..aOM<StructuredQuery_UnaryFilter>(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'unaryFilter',
+    ..aOM<StructuredQuery_UnaryFilter>(3, _omitFieldNames ? '' : 'unaryFilter',
         subBuilder: StructuredQuery_UnaryFilter.create)
     ..hasRequiredFields = false;
 
-  StructuredQuery_Filter._() : super();
-  factory StructuredQuery_Filter({
-    StructuredQuery_CompositeFilter? compositeFilter,
-    StructuredQuery_FieldFilter? fieldFilter,
-    StructuredQuery_UnaryFilter? unaryFilter,
-  }) {
-    final _result = create();
-    if (compositeFilter != null) {
-      _result.compositeFilter = compositeFilter;
-    }
-    if (fieldFilter != null) {
-      _result.fieldFilter = fieldFilter;
-    }
-    if (unaryFilter != null) {
-      _result.unaryFilter = unaryFilter;
-    }
-    return _result;
-  }
-  factory StructuredQuery_Filter.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory StructuredQuery_Filter.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -189,8 +141,10 @@ class StructuredQuery_Filter extends $pb.GeneratedMessage {
   StructuredQuery_Filter copyWith(
           void Function(StructuredQuery_Filter) updates) =>
       super.copyWith((message) => updates(message as StructuredQuery_Filter))
-          as StructuredQuery_Filter; // ignore: deprecated_member_use
+          as StructuredQuery_Filter;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery_Filter create() => StructuredQuery_Filter._();
   StructuredQuery_Filter createEmptyInstance() => create();
@@ -249,54 +203,31 @@ class StructuredQuery_Filter extends $pb.GeneratedMessage {
 }
 
 class StructuredQuery_CompositeFilter extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery.CompositeFilter',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..e<StructuredQuery_CompositeFilter_Operator>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'op',
-        $pb.PbFieldType.OE,
-        defaultOrMaker:
-            StructuredQuery_CompositeFilter_Operator.OPERATOR_UNSPECIFIED,
-        valueOf: StructuredQuery_CompositeFilter_Operator.valueOf,
-        enumValues: StructuredQuery_CompositeFilter_Operator.values)
-    ..pc<StructuredQuery_Filter>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'filters',
-        $pb.PbFieldType.PM,
-        subBuilder: StructuredQuery_Filter.create)
-    ..hasRequiredFields = false;
-
+  factory StructuredQuery_CompositeFilter() => create();
   StructuredQuery_CompositeFilter._() : super();
-  factory StructuredQuery_CompositeFilter({
-    StructuredQuery_CompositeFilter_Operator? op,
-    $core.Iterable<StructuredQuery_Filter>? filters,
-  }) {
-    final _result = create();
-    if (op != null) {
-      _result.op = op;
-    }
-    if (filters != null) {
-      _result.filters.addAll(filters);
-    }
-    return _result;
-  }
   factory StructuredQuery_CompositeFilter.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredQuery_CompositeFilter.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredQuery.CompositeFilter',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..e<StructuredQuery_CompositeFilter_Operator>(
+        1, _omitFieldNames ? '' : 'op', $pb.PbFieldType.OE,
+        defaultOrMaker:
+            StructuredQuery_CompositeFilter_Operator.OPERATOR_UNSPECIFIED,
+        valueOf: StructuredQuery_CompositeFilter_Operator.valueOf,
+        enumValues: StructuredQuery_CompositeFilter_Operator.values)
+    ..pc<StructuredQuery_Filter>(
+        2, _omitFieldNames ? '' : 'filters', $pb.PbFieldType.PM,
+        subBuilder: StructuredQuery_Filter.create)
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -309,8 +240,10 @@ class StructuredQuery_CompositeFilter extends $pb.GeneratedMessage {
           void Function(StructuredQuery_CompositeFilter) updates) =>
       super.copyWith(
               (message) => updates(message as StructuredQuery_CompositeFilter))
-          as StructuredQuery_CompositeFilter; // ignore: deprecated_member_use
+          as StructuredQuery_CompositeFilter;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery_CompositeFilter create() =>
       StructuredQuery_CompositeFilter._();
@@ -340,63 +273,32 @@ class StructuredQuery_CompositeFilter extends $pb.GeneratedMessage {
 }
 
 class StructuredQuery_FieldFilter extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery.FieldFilter',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..aOM<StructuredQuery_FieldReference>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'field',
-        subBuilder: StructuredQuery_FieldReference.create)
-    ..e<StructuredQuery_FieldFilter_Operator>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'op',
-        $pb.PbFieldType.OE,
-        defaultOrMaker:
-            StructuredQuery_FieldFilter_Operator.OPERATOR_UNSPECIFIED,
-        valueOf: StructuredQuery_FieldFilter_Operator.valueOf,
-        enumValues: StructuredQuery_FieldFilter_Operator.values)
-    ..aOM<$1.Value>(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'value',
-        subBuilder: $1.Value.create)
-    ..hasRequiredFields = false;
-
+  factory StructuredQuery_FieldFilter() => create();
   StructuredQuery_FieldFilter._() : super();
-  factory StructuredQuery_FieldFilter({
-    StructuredQuery_FieldReference? field_1,
-    StructuredQuery_FieldFilter_Operator? op,
-    $1.Value? value,
-  }) {
-    final _result = create();
-    if (field_1 != null) {
-      _result.field_1 = field_1;
-    }
-    if (op != null) {
-      _result.op = op;
-    }
-    if (value != null) {
-      _result.value = value;
-    }
-    return _result;
-  }
   factory StructuredQuery_FieldFilter.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredQuery_FieldFilter.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredQuery.FieldFilter',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..aOM<StructuredQuery_FieldReference>(1, _omitFieldNames ? '' : 'field',
+        subBuilder: StructuredQuery_FieldReference.create)
+    ..e<StructuredQuery_FieldFilter_Operator>(
+        2, _omitFieldNames ? '' : 'op', $pb.PbFieldType.OE,
+        defaultOrMaker:
+            StructuredQuery_FieldFilter_Operator.OPERATOR_UNSPECIFIED,
+        valueOf: StructuredQuery_FieldFilter_Operator.valueOf,
+        enumValues: StructuredQuery_FieldFilter_Operator.values)
+    ..aOM<$1.Value>(3, _omitFieldNames ? '' : 'value',
+        subBuilder: $1.Value.create)
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -409,8 +311,10 @@ class StructuredQuery_FieldFilter extends $pb.GeneratedMessage {
           void Function(StructuredQuery_FieldFilter) updates) =>
       super.copyWith(
               (message) => updates(message as StructuredQuery_FieldFilter))
-          as StructuredQuery_FieldFilter; // ignore: deprecated_member_use
+          as StructuredQuery_FieldFilter;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery_FieldFilter create() =>
       StructuredQuery_FieldFilter._();
@@ -466,59 +370,36 @@ class StructuredQuery_FieldFilter extends $pb.GeneratedMessage {
 enum StructuredQuery_UnaryFilter_OperandType { field_2, notSet }
 
 class StructuredQuery_UnaryFilter extends $pb.GeneratedMessage {
-  static const $core.Map<$core.int, StructuredQuery_UnaryFilter_OperandType>
-      _StructuredQuery_UnaryFilter_OperandTypeByTag = {
-    2: StructuredQuery_UnaryFilter_OperandType.field_2,
-    0: StructuredQuery_UnaryFilter_OperandType.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery.UnaryFilter',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..oo(0, [2])
-    ..e<StructuredQuery_UnaryFilter_Operator>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'op',
-        $pb.PbFieldType.OE,
-        defaultOrMaker:
-            StructuredQuery_UnaryFilter_Operator.OPERATOR_UNSPECIFIED,
-        valueOf: StructuredQuery_UnaryFilter_Operator.valueOf,
-        enumValues: StructuredQuery_UnaryFilter_Operator.values)
-    ..aOM<StructuredQuery_FieldReference>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'field',
-        subBuilder: StructuredQuery_FieldReference.create)
-    ..hasRequiredFields = false;
-
+  factory StructuredQuery_UnaryFilter() => create();
   StructuredQuery_UnaryFilter._() : super();
-  factory StructuredQuery_UnaryFilter({
-    StructuredQuery_UnaryFilter_Operator? op,
-    StructuredQuery_FieldReference? field_2,
-  }) {
-    final _result = create();
-    if (op != null) {
-      _result.op = op;
-    }
-    if (field_2 != null) {
-      _result.field_2 = field_2;
-    }
-    return _result;
-  }
   factory StructuredQuery_UnaryFilter.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredQuery_UnaryFilter.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static const $core.Map<$core.int, StructuredQuery_UnaryFilter_OperandType>
+      _StructuredQuery_UnaryFilter_OperandTypeByTag = {
+    2: StructuredQuery_UnaryFilter_OperandType.field_2,
+    0: StructuredQuery_UnaryFilter_OperandType.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredQuery.UnaryFilter',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..oo(0, [2])
+    ..e<StructuredQuery_UnaryFilter_Operator>(
+        1, _omitFieldNames ? '' : 'op', $pb.PbFieldType.OE,
+        defaultOrMaker:
+            StructuredQuery_UnaryFilter_Operator.OPERATOR_UNSPECIFIED,
+        valueOf: StructuredQuery_UnaryFilter_Operator.valueOf,
+        enumValues: StructuredQuery_UnaryFilter_Operator.values)
+    ..aOM<StructuredQuery_FieldReference>(2, _omitFieldNames ? '' : 'field',
+        subBuilder: StructuredQuery_FieldReference.create)
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -531,8 +412,10 @@ class StructuredQuery_UnaryFilter extends $pb.GeneratedMessage {
           void Function(StructuredQuery_UnaryFilter) updates) =>
       super.copyWith(
               (message) => updates(message as StructuredQuery_UnaryFilter))
-          as StructuredQuery_UnaryFilter; // ignore: deprecated_member_use
+          as StructuredQuery_UnaryFilter;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery_UnaryFilter create() =>
       StructuredQuery_UnaryFilter._();
@@ -576,52 +459,29 @@ class StructuredQuery_UnaryFilter extends $pb.GeneratedMessage {
 }
 
 class StructuredQuery_Order extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery.Order',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..aOM<StructuredQuery_FieldReference>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'field',
-        subBuilder: StructuredQuery_FieldReference.create)
-    ..e<StructuredQuery_Direction>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'direction',
-        $pb.PbFieldType.OE,
-        defaultOrMaker: StructuredQuery_Direction.DIRECTION_UNSPECIFIED,
-        valueOf: StructuredQuery_Direction.valueOf,
-        enumValues: StructuredQuery_Direction.values)
-    ..hasRequiredFields = false;
-
+  factory StructuredQuery_Order() => create();
   StructuredQuery_Order._() : super();
-  factory StructuredQuery_Order({
-    StructuredQuery_FieldReference? field_1,
-    StructuredQuery_Direction? direction,
-  }) {
-    final _result = create();
-    if (field_1 != null) {
-      _result.field_1 = field_1;
-    }
-    if (direction != null) {
-      _result.direction = direction;
-    }
-    return _result;
-  }
   factory StructuredQuery_Order.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredQuery_Order.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredQuery.Order',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..aOM<StructuredQuery_FieldReference>(1, _omitFieldNames ? '' : 'field',
+        subBuilder: StructuredQuery_FieldReference.create)
+    ..e<StructuredQuery_Direction>(
+        2, _omitFieldNames ? '' : 'direction', $pb.PbFieldType.OE,
+        defaultOrMaker: StructuredQuery_Direction.DIRECTION_UNSPECIFIED,
+        valueOf: StructuredQuery_Direction.valueOf,
+        enumValues: StructuredQuery_Direction.values)
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -633,8 +493,10 @@ class StructuredQuery_Order extends $pb.GeneratedMessage {
   StructuredQuery_Order copyWith(
           void Function(StructuredQuery_Order) updates) =>
       super.copyWith((message) => updates(message as StructuredQuery_Order))
-          as StructuredQuery_Order; // ignore: deprecated_member_use
+          as StructuredQuery_Order;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery_Order create() => StructuredQuery_Order._();
   StructuredQuery_Order createEmptyInstance() => create();
@@ -673,38 +535,23 @@ class StructuredQuery_Order extends $pb.GeneratedMessage {
 }
 
 class StructuredQuery_FieldReference extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery.FieldReference',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..aOS(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'fieldPath')
-    ..hasRequiredFields = false;
-
+  factory StructuredQuery_FieldReference() => create();
   StructuredQuery_FieldReference._() : super();
-  factory StructuredQuery_FieldReference({
-    $core.String? fieldPath,
-  }) {
-    final _result = create();
-    if (fieldPath != null) {
-      _result.fieldPath = fieldPath;
-    }
-    return _result;
-  }
   factory StructuredQuery_FieldReference.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredQuery_FieldReference.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredQuery.FieldReference',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..aOS(2, _omitFieldNames ? '' : 'fieldPath')
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -717,8 +564,10 @@ class StructuredQuery_FieldReference extends $pb.GeneratedMessage {
           void Function(StructuredQuery_FieldReference) updates) =>
       super.copyWith(
               (message) => updates(message as StructuredQuery_FieldReference))
-          as StructuredQuery_FieldReference; // ignore: deprecated_member_use
+          as StructuredQuery_FieldReference;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery_FieldReference create() =>
       StructuredQuery_FieldReference._();
@@ -744,40 +593,25 @@ class StructuredQuery_FieldReference extends $pb.GeneratedMessage {
 }
 
 class StructuredQuery_Projection extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery.Projection',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..pc<StructuredQuery_FieldReference>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'fields',
-        $pb.PbFieldType.PM,
-        subBuilder: StructuredQuery_FieldReference.create)
-    ..hasRequiredFields = false;
-
+  factory StructuredQuery_Projection() => create();
   StructuredQuery_Projection._() : super();
-  factory StructuredQuery_Projection({
-    $core.Iterable<StructuredQuery_FieldReference>? fields,
-  }) {
-    final _result = create();
-    if (fields != null) {
-      _result.fields.addAll(fields);
-    }
-    return _result;
-  }
   factory StructuredQuery_Projection.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredQuery_Projection.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredQuery.Projection',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..pc<StructuredQuery_FieldReference>(
+        2, _omitFieldNames ? '' : 'fields', $pb.PbFieldType.PM,
+        subBuilder: StructuredQuery_FieldReference.create)
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -790,8 +624,10 @@ class StructuredQuery_Projection extends $pb.GeneratedMessage {
           void Function(StructuredQuery_Projection) updates) =>
       super.copyWith(
               (message) => updates(message as StructuredQuery_Projection))
-          as StructuredQuery_Projection; // ignore: deprecated_member_use
+          as StructuredQuery_Projection;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery_Projection create() => StructuredQuery_Projection._();
   StructuredQuery_Projection createEmptyInstance() => create();
@@ -807,111 +643,38 @@ class StructuredQuery_Projection extends $pb.GeneratedMessage {
 }
 
 class StructuredQuery extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredQuery',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..aOM<StructuredQuery_Projection>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'select',
-        subBuilder: StructuredQuery_Projection.create)
-    ..pc<StructuredQuery_CollectionSelector>(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'from',
-        $pb.PbFieldType.PM,
-        subBuilder: StructuredQuery_CollectionSelector.create)
-    ..aOM<StructuredQuery_Filter>(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'where',
-        subBuilder: StructuredQuery_Filter.create)
-    ..pc<StructuredQuery_Order>(
-        4,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'orderBy',
-        $pb.PbFieldType.PM,
-        subBuilder: StructuredQuery_Order.create)
-    ..aOM<$0.Int32Value>(
-        5,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'limit',
-        subBuilder: $0.Int32Value.create)
-    ..a<$core.int>(
-        6,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'offset',
-        $pb.PbFieldType.O3)
-    ..aOM<Cursor>(
-        7,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'startAt',
-        subBuilder: Cursor.create)
-    ..aOM<Cursor>(
-        8,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'endAt',
-        subBuilder: Cursor.create)
-    ..hasRequiredFields = false;
-
+  factory StructuredQuery() => create();
   StructuredQuery._() : super();
-  factory StructuredQuery({
-    StructuredQuery_Projection? select,
-    $core.Iterable<StructuredQuery_CollectionSelector>? from,
-    StructuredQuery_Filter? where,
-    $core.Iterable<StructuredQuery_Order>? orderBy,
-    $0.Int32Value? limit,
-    $core.int? offset,
-    Cursor? startAt,
-    Cursor? endAt,
-  }) {
-    final _result = create();
-    if (select != null) {
-      _result.select = select;
-    }
-    if (from != null) {
-      _result.from.addAll(from);
-    }
-    if (where != null) {
-      _result.where = where;
-    }
-    if (orderBy != null) {
-      _result.orderBy.addAll(orderBy);
-    }
-    if (limit != null) {
-      _result.limit = limit;
-    }
-    if (offset != null) {
-      _result.offset = offset;
-    }
-    if (startAt != null) {
-      _result.startAt = startAt;
-    }
-    if (endAt != null) {
-      _result.endAt = endAt;
-    }
-    return _result;
-  }
   factory StructuredQuery.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredQuery.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredQuery',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..aOM<StructuredQuery_Projection>(1, _omitFieldNames ? '' : 'select',
+        subBuilder: StructuredQuery_Projection.create)
+    ..pc<StructuredQuery_CollectionSelector>(
+        2, _omitFieldNames ? '' : 'from', $pb.PbFieldType.PM,
+        subBuilder: StructuredQuery_CollectionSelector.create)
+    ..aOM<StructuredQuery_Filter>(3, _omitFieldNames ? '' : 'where',
+        subBuilder: StructuredQuery_Filter.create)
+    ..pc<StructuredQuery_Order>(
+        4, _omitFieldNames ? '' : 'orderBy', $pb.PbFieldType.PM,
+        subBuilder: StructuredQuery_Order.create)
+    ..aOM<$0.Int32Value>(5, _omitFieldNames ? '' : 'limit',
+        subBuilder: $0.Int32Value.create)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.O3)
+    ..aOM<Cursor>(7, _omitFieldNames ? '' : 'startAt',
+        subBuilder: Cursor.create)
+    ..aOM<Cursor>(8, _omitFieldNames ? '' : 'endAt', subBuilder: Cursor.create)
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -921,8 +684,10 @@ class StructuredQuery extends $pb.GeneratedMessage {
       'Will be removed in next major version')
   StructuredQuery copyWith(void Function(StructuredQuery) updates) =>
       super.copyWith((message) => updates(message as StructuredQuery))
-          as StructuredQuery; // ignore: deprecated_member_use
+          as StructuredQuery;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredQuery create() => StructuredQuery._();
   StructuredQuery createEmptyInstance() => create();
@@ -1024,33 +789,8 @@ class StructuredQuery extends $pb.GeneratedMessage {
 
 class StructuredAggregationQuery_Aggregation_Count
     extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredAggregationQuery.Aggregation.Count',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..aOM<$0.Int64Value>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'upTo',
-        subBuilder: $0.Int64Value.create)
-    ..hasRequiredFields = false;
-
+  factory StructuredAggregationQuery_Aggregation_Count() => create();
   StructuredAggregationQuery_Aggregation_Count._() : super();
-  factory StructuredAggregationQuery_Aggregation_Count({
-    $0.Int64Value? upTo,
-  }) {
-    final _result = create();
-    if (upTo != null) {
-      _result.upTo = upTo;
-    }
-    return _result;
-  }
   factory StructuredAggregationQuery_Aggregation_Count.fromBuffer(
           $core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
@@ -1058,6 +798,16 @@ class StructuredAggregationQuery_Aggregation_Count
   factory StructuredAggregationQuery_Aggregation_Count.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredAggregationQuery.Aggregation.Count',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..aOM<$0.Int64Value>(1, _omitFieldNames ? '' : 'upTo',
+        subBuilder: $0.Int64Value.create)
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -1071,8 +821,10 @@ class StructuredAggregationQuery_Aggregation_Count
               updates) =>
       super.copyWith((message) =>
               updates(message as StructuredAggregationQuery_Aggregation_Count))
-          as StructuredAggregationQuery_Aggregation_Count; // ignore: deprecated_member_use
+          as StructuredAggregationQuery_Aggregation_Count;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredAggregationQuery_Aggregation_Count create() =>
       StructuredAggregationQuery_Aggregation_Count._();
@@ -1105,49 +857,8 @@ class StructuredAggregationQuery_Aggregation_Count
 enum StructuredAggregationQuery_Aggregation_Operator { count, notSet }
 
 class StructuredAggregationQuery_Aggregation extends $pb.GeneratedMessage {
-  static const $core
-          .Map<$core.int, StructuredAggregationQuery_Aggregation_Operator>
-      _StructuredAggregationQuery_Aggregation_OperatorByTag = {
-    1: StructuredAggregationQuery_Aggregation_Operator.count,
-    0: StructuredAggregationQuery_Aggregation_Operator.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredAggregationQuery.Aggregation',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..oo(0, [1])
-    ..aOM<StructuredAggregationQuery_Aggregation_Count>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'count',
-        subBuilder: StructuredAggregationQuery_Aggregation_Count.create)
-    ..aOS(
-        7,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'alias')
-    ..hasRequiredFields = false;
-
+  factory StructuredAggregationQuery_Aggregation() => create();
   StructuredAggregationQuery_Aggregation._() : super();
-  factory StructuredAggregationQuery_Aggregation({
-    StructuredAggregationQuery_Aggregation_Count? count,
-    $core.String? alias,
-  }) {
-    final _result = create();
-    if (count != null) {
-      _result.count = count;
-    }
-    if (alias != null) {
-      _result.alias = alias;
-    }
-    return _result;
-  }
   factory StructuredAggregationQuery_Aggregation.fromBuffer(
           $core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
@@ -1155,6 +866,25 @@ class StructuredAggregationQuery_Aggregation extends $pb.GeneratedMessage {
   factory StructuredAggregationQuery_Aggregation.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static const $core
+          .Map<$core.int, StructuredAggregationQuery_Aggregation_Operator>
+      _StructuredAggregationQuery_Aggregation_OperatorByTag = {
+    1: StructuredAggregationQuery_Aggregation_Operator.count,
+    0: StructuredAggregationQuery_Aggregation_Operator.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredAggregationQuery.Aggregation',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..oo(0, [1])
+    ..aOM<StructuredAggregationQuery_Aggregation_Count>(
+        1, _omitFieldNames ? '' : 'count',
+        subBuilder: StructuredAggregationQuery_Aggregation_Count.create)
+    ..aOS(7, _omitFieldNames ? '' : 'alias')
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -1167,8 +897,10 @@ class StructuredAggregationQuery_Aggregation extends $pb.GeneratedMessage {
           void Function(StructuredAggregationQuery_Aggregation) updates) =>
       super.copyWith((message) =>
               updates(message as StructuredAggregationQuery_Aggregation))
-          as StructuredAggregationQuery_Aggregation; // ignore: deprecated_member_use
+          as StructuredAggregationQuery_Aggregation;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredAggregationQuery_Aggregation create() =>
       StructuredAggregationQuery_Aggregation._();
@@ -1215,56 +947,33 @@ class StructuredAggregationQuery_Aggregation extends $pb.GeneratedMessage {
 enum StructuredAggregationQuery_QueryType { structuredQuery, notSet }
 
 class StructuredAggregationQuery extends $pb.GeneratedMessage {
-  static const $core.Map<$core.int, StructuredAggregationQuery_QueryType>
-      _StructuredAggregationQuery_QueryTypeByTag = {
-    1: StructuredAggregationQuery_QueryType.structuredQuery,
-    0: StructuredAggregationQuery_QueryType.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'StructuredAggregationQuery',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..oo(0, [1])
-    ..aOM<StructuredQuery>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'structuredQuery',
-        subBuilder: StructuredQuery.create)
-    ..pc<StructuredAggregationQuery_Aggregation>(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'aggregations',
-        $pb.PbFieldType.PM,
-        subBuilder: StructuredAggregationQuery_Aggregation.create)
-    ..hasRequiredFields = false;
-
+  factory StructuredAggregationQuery() => create();
   StructuredAggregationQuery._() : super();
-  factory StructuredAggregationQuery({
-    StructuredQuery? structuredQuery,
-    $core.Iterable<StructuredAggregationQuery_Aggregation>? aggregations,
-  }) {
-    final _result = create();
-    if (structuredQuery != null) {
-      _result.structuredQuery = structuredQuery;
-    }
-    if (aggregations != null) {
-      _result.aggregations.addAll(aggregations);
-    }
-    return _result;
-  }
   factory StructuredAggregationQuery.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory StructuredAggregationQuery.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static const $core.Map<$core.int, StructuredAggregationQuery_QueryType>
+      _StructuredAggregationQuery_QueryTypeByTag = {
+    1: StructuredAggregationQuery_QueryType.structuredQuery,
+    0: StructuredAggregationQuery_QueryType.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StructuredAggregationQuery',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..oo(0, [1])
+    ..aOM<StructuredQuery>(1, _omitFieldNames ? '' : 'structuredQuery',
+        subBuilder: StructuredQuery.create)
+    ..pc<StructuredAggregationQuery_Aggregation>(
+        3, _omitFieldNames ? '' : 'aggregations', $pb.PbFieldType.PM,
+        subBuilder: StructuredAggregationQuery_Aggregation.create)
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -1277,8 +986,10 @@ class StructuredAggregationQuery extends $pb.GeneratedMessage {
           void Function(StructuredAggregationQuery) updates) =>
       super.copyWith(
               (message) => updates(message as StructuredAggregationQuery))
-          as StructuredAggregationQuery; // ignore: deprecated_member_use
+          as StructuredAggregationQuery;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static StructuredAggregationQuery create() => StructuredAggregationQuery._();
   StructuredAggregationQuery createEmptyInstance() => create();
@@ -1313,49 +1024,25 @@ class StructuredAggregationQuery extends $pb.GeneratedMessage {
 }
 
 class Cursor extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'Cursor',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'google.firestore.v1'),
-      createEmptyInstance: create)
-    ..pc<$1.Value>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'values',
-        $pb.PbFieldType.PM,
-        subBuilder: $1.Value.create)
-    ..aOB(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'before')
-    ..hasRequiredFields = false;
-
+  factory Cursor() => create();
   Cursor._() : super();
-  factory Cursor({
-    $core.Iterable<$1.Value>? values,
-    $core.bool? before,
-  }) {
-    final _result = create();
-    if (values != null) {
-      _result.values.addAll(values);
-    }
-    if (before != null) {
-      _result.before = before;
-    }
-    return _result;
-  }
   factory Cursor.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
   factory Cursor.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'Cursor',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'google.firestore.v1'),
+      createEmptyInstance: create)
+    ..pc<$1.Value>(1, _omitFieldNames ? '' : 'values', $pb.PbFieldType.PM,
+        subBuilder: $1.Value.create)
+    ..aOB(2, _omitFieldNames ? '' : 'before')
+    ..hasRequiredFields = false;
+
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
@@ -1364,9 +1051,10 @@ class Cursor extends $pb.GeneratedMessage {
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
   Cursor copyWith(void Function(Cursor) updates) =>
-      super.copyWith((message) => updates(message as Cursor))
-          as Cursor; // ignore: deprecated_member_use
+      super.copyWith((message) => updates(message as Cursor)) as Cursor;
+
   $pb.BuilderInfo get info_ => _i;
+
   @$core.pragma('dart2js:noInline')
   static Cursor create() => Cursor._();
   Cursor createEmptyInstance() => create();
@@ -1391,3 +1079,7 @@ class Cursor extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearBefore() => clearField(2);
 }
+
+const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
+const _omitMessageNames =
+    $core.bool.fromEnvironment('protobuf.omit_message_names');

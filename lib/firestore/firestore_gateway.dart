@@ -255,8 +255,9 @@ class FirestoreGateway {
     final writeResults = <WriteResult>[];
 
     try {
-      final resp = await _client
-          .commit(CommitRequest(database: database, writes: writes));
+      final resp = await _client.commit(CommitRequest()
+        ..database = database
+        ..writes.addAll(writes));
 
       for (final writeResult in resp.writeResults) {
         writeResults.add(WriteResult(writeResult.updateTime.toDateTime()));

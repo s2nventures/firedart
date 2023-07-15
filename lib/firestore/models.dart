@@ -406,10 +406,8 @@ class WriteBatch {
 
     doc.name = docRef.fullPath;
 
-    writes.add(pb.Write(
-      update: doc,
-      //todo: updateTransforms
-    ));
+    //todo: updateTransforms
+    writes.add(pb.Write()..update = doc);
   }
 
   void set(DocumentReference docRef, Map<String, dynamic> data) {
@@ -417,10 +415,8 @@ class WriteBatch {
 
     doc.name = docRef.fullPath;
 
-    writes.add(pb.Write(
-      update: doc,
-      //todo: updateTransforms
-    ));
+    //todo: updateTransforms
+    writes.add(pb.Write()..update = doc);
   }
 
   ///todo
@@ -440,7 +436,7 @@ class WriteBatch {
   // }
 
   void delete(DocumentReference docRef) {
-    writes.add(pb.Write(delete: docRef.fullPath));
+    writes.add(pb.Write()..delete = docRef.fullPath);
   }
 
   Future<List<WriteResult>?> commit() => gateway.commit(writes);
