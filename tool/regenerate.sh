@@ -22,6 +22,7 @@ $PROTOC $PROTOBUF/src/google/protobuf/timestamp.proto
 $PROTOC $PROTOBUF/src/google/protobuf/wrappers.proto
 
 $PROTOC $GOOGLEAPIS/google/firestore/v1/aggregation_result.proto
+$PROTOC $GOOGLEAPIS/google/firestore/v1/bloom_filter.proto
 $PROTOC $GOOGLEAPIS/google/firestore/v1/common.proto
 $PROTOC $GOOGLEAPIS/google/firestore/v1/document.proto
 $PROTOC $GOOGLEAPIS/google/firestore/v1/firestore.proto
