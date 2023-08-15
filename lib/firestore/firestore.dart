@@ -23,7 +23,7 @@ class Firestore {
     Emulator? emulator,
     ErrorHandler? onError,
   }) {
-    if (_instance != null) {
+    if (initialized) {
       throw Exception('Firestore instance was already initialized');
     }
     final RequestAuthenticator? authenticator;
@@ -54,8 +54,10 @@ class Firestore {
     return _instance!;
   }
 
+  static bool get initialized => _instance != null;
+
   static Firestore get instance {
-    if (_instance == null) {
+    if (!initialized) {
       throw Exception(
           "Firestore hasn't been initialized. Please call Firestore.initialize() before using it.");
     }

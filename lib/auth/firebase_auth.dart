@@ -14,15 +14,17 @@ class FirebaseAuth {
     TokenStore tokenStore, {
     http.Client? httpClient,
   }) {
-    if (_instance != null) {
+    if (initialized) {
       throw Exception('FirebaseAuth instance was already initialized');
     }
     _instance = FirebaseAuth(apiKey, tokenStore, httpClient: httpClient);
     return _instance!;
   }
 
+  static bool get initialized => _instance != null;
+
   static FirebaseAuth get instance {
-    if (_instance == null) {
+    if (!initialized) {
       throw Exception(
           "FirebaseAuth hasn't been initialized. Please call FirebaseAuth.initialize() before using it.");
     }

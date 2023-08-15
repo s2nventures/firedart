@@ -116,8 +116,7 @@ class FirestoreGateway {
     Emulator? emulator,
     this.onError,
   })  : _authenticator = authenticator,
-        database =
-            'projects/$projectId/databases/${databaseId ?? '(default)'}/documents',
+        database = 'projects/$projectId/databases/${databaseId ?? '(default)'}',
         documentsRoot =
             'projects/$projectId/databases/${databaseId ?? '(default)'}/documents',
         _listenRequestStreamMap = <String, _FirestoreGatewayStreamCache>{} {

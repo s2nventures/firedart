@@ -1,3 +1,11 @@
+## 0.9.7
+
+- Add ability to check if Firestore or FirebaseAuth are already initialized (eximius313)
+
+## 0.9.6
+
+- Make the GrpcError class visible to clients
+
 ## 0.9.5
 
 - Fix closing connections properly (@nullbtb)
